@@ -1,3 +1,4 @@
+from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from reservationsApp.models import Reservation
@@ -26,10 +27,14 @@ def items_panel(request):
     if not (user.is_superuser and user.is_staff):
         return redirect('/')
     articles = Article.objects.all()
+    artistates = Article.STATES
     spaces = Space.objects.all()
+    spacestates = Space.STATES
     context = {
         'articles': articles,
-        'spaces': spaces
+        'articlestates': artistates,
+        'spaces': spaces,
+        'spacestates': spacestates
     }
     return render(request, 'items_panel.html', context)
 
@@ -49,7 +54,7 @@ def actions_panel(request):
                'P': 'rgba(51,51,204,0.7)',
                 'R': 'rgba(153, 0, 0,0.7)'}
 
-    reservations = Reservation.objects.filter(state='P').order_by('starting_date_time')
+    reservations = Reservation.objects.filter(state='P').order_by('-pk')
     current_week_reservations = Reservation.objects.filter(starting_date_time__week = current_week)
     actual_date = datetime.now(tz=pytz.utc)
     try:
@@ -63,7 +68,7 @@ def actions_panel(request):
             else:
                 loans = Loan.objects.all().order_by('starting_date_time')
     except:
-        loans = Loan.objects.all().order_by('starting_date_time')
+        loans = Loan.objects.all().order_by('-pk')
 
     res_list = []
     for i in range(5):
@@ -109,7 +114,7 @@ def modify_reservations(request):
     if request.method == "POST":
 
         accept = True if (request.POST["accept"] == "1") else False
-        reservations = Reservation.objects.filter(id__in=request.POST["selected"])
+        reservations = Reservation.objects.filter(id__in=request.POST.getlist("selected"))
         if accept:
             for reservation in reservations:
                 reservation.state = 'A'
@@ -120,3 +125,36 @@ def modify_reservations(request):
                 reservation.save()
 
     return redirect('/admin/actions-panel')
+
+def modify_loans(request):
+    user = request.user
+    if not (user.is_superuser and user.is_staff):
+        return redirect('/')
+    if request.method == "POST":
+
+        accept = True if (request.POST["accept"] == "1") \
+            else False
+        loans = Loan.objects.filter(id__in=request.POST.getlist("selected-loan"))
+        if accept:
+            for loan in loans:
+                loan.state = 'A'#corregir estado
+                loan.save()
+        else:
+            for loan in loans:
+                loan.state = 'R'#corregir estado
+                loan.save()
+
+    return redirect('/admin/actions-panel')
+
+def create_article(request):
+    # user = request.user
+    # if not (user.is_superuser and user.is_staff):
+    #     return redirect('/')
+    if request.method == "POST":
+        name = request.POST['ArticleName']
+        state = request.POST['ArticleStateInput']
+        photo = request.POST['ArticlePhoto']
+        desc = request.POST['ArticleDesc']
+
+    # return redirect('/admin/items-panel')
+    return HttpResponse("crear articulo: " + str(name))
