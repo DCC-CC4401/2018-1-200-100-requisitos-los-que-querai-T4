@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.utils.timezone import localtime
 import datetime
 from articlesApp.models import Article
-from reservationsApp.models import Reservation
+from reservationsApp.models import SpaceReservation
 from django.contrib.auth.decorators import login_required
 
 
@@ -14,7 +14,6 @@ def landing_articles(request):
 
 @login_required
 def landing_spaces(request, date=None):
-
     if date:
         current_date = date
         current_week = datetime.datetime.strptime(current_date,"%Y-%m-%d").date().isocalendar()[1]
@@ -26,7 +25,7 @@ def landing_spaces(request, date=None):
             current_week = datetime.date.today().isocalendar()[1]
             current_date = datetime.date.today().strftime("%Y-%m-%d")
 
-    reservations = Reservation.objects.filter(starting_date_time__week = current_week, state__in = ['P','A'])
+    reservations = SpaceReservation.objects.filter(starting_date_time__week = current_week, state__in = ['P','A'])
     colores = {'A': 'rgba(0,153,0,0.7)',
                'P': 'rgba(51,51,204,0.7)'}
 

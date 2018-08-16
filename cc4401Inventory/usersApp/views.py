@@ -4,10 +4,6 @@ from django.contrib.auth import authenticate, login, logout
 from mainApp.models import User
 from django.contrib import messages
 
-from reservationsApp.models import Reservation
-
-from loansApp.models import Loan
-
 
 def login_view(request):
     context = {}
@@ -19,15 +15,16 @@ def login_view(request):
 
 # se llama cuando se envia el formulario de login
 def login_submit(request):
-
     username = request.POST['email']
     password = request.POST['password']
     user = authenticate(request, username=username, password=password)
     context = {'error_message': ''}
-
     if user is not None:
         login(request, user)
-        return redirect('/articles/')
+        if not (user.is_superuser or user.is_staff):
+            return redirect('/articles')
+        else:
+            return redirect('/admin')
     else:
         messages.warning(request, 'La contraseña ingresada no es correcta o el usuario no existe')
         return redirect('/user/login')

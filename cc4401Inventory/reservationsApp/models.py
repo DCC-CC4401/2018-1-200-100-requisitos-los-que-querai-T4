@@ -1,7 +1,12 @@
 from mainApp.models import Action
+from articlesApp.models import Article
 from spacesApp.models import Space
 from django.db import models
 
 
-class Reservation(Action):
+class ArticleReservation(Action):
+    article = models.ForeignKey(Article, on_delete=models.CASCADE)
+
+class SpaceReservation(Action):
     space = models.ForeignKey(Space, on_delete=models.CASCADE)
+

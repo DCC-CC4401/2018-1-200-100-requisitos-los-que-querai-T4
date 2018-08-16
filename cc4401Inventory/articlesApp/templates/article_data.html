@@ -16,14 +16,14 @@
       <div class="row">
         <h1 class="article-name">
           {{ article.name }}
-        {% if article.state == "D" %}
-            <span class="badge badge-pill badge-success"><i class="fas fa-chevron-left"></i> {{  article.get_state_display }}</span>
+          {% if article.state == "D" %}
+            <span class="badge badge-pill badge-success"><i class="fas fa-chevron-left"></i>{{ article.get_state_display }}</span>
           {% elif article.state == "P" %}
-            <span class="badge badge-pill badge-primary"><i class="fas fa-chevron-left"></i> {{  article.get_state_display }}</span>
+            <span class="badge badge-pill badge-primary"><i class="fas fa-chevron-left"></i>{{ article.get_state_display }}</span>
           {% elif article.state == "L" %}
-            <span class="badge badge-pill badge-danger"><i class="fas fa-chevron-left"></i> {{  article.get_state_display }}</span>
+            <span class="badge badge-pill badge-danger"><i class="fas fa-chevron-left"></i>{{ article.get_state_display }}</span>
           {% elif article.state == "R" %}
-            <span class="badge badge-pill badge-warning"><i class="fas fa-chevron-left"></i> {{  article.get_state_display }}</span>
+            <span class="badge badge-pill badge-warning"><i class="fas fa-chevron-left"></i>{{ article.get_state_display }}</span>
           {% endif %}
          </h1>
       </div>
@@ -35,24 +35,22 @@
 
       <div class="card">
         <div class="card-header article-description-title">Descripción</div>
-        <div class="card-body">
-          <p class="card-text">{{ article.description }}</p>
-        </div>
+        <div class="card-body"><p class="card-text">{{ article.description }}</p></div>
       </div>
     </div>
 
     <div class = "col-md-5 offset-2">
       <h3 class="block-title">Solicitar reserva</h3>
-      <form action="{% url  'article_request' %}" method="post" class="reservation-form">
+      <form action="{% url 'article_request' %}" method="post" class="reservation-form">
         {% csrf_token%}
         <input type="hidden" name="article_id" value="{{ article.id }}">
 
-        <div class = "row">
+        <div class="row">
           <div class="col-md-4">
             <label>Fecha inicio: </label>
           </div>
           <div class="col-md-8">
-            <input name="fecha_inicio" type = "date" name = "desde" /> <label><i class="far fa-calendar-alt"></i></label>
+            <input name="fecha_inicio" type="date" /> <label><i class="far fa-calendar-alt"></i></label>
           </div>
         </div>
         <div class = "row">
@@ -60,7 +58,7 @@
             <label>Hora inicio: </label>
           </div>
           <div class="col-md-8">
-            <input name="hora_inicio" type = "time" name = "asdad" />
+            <input name="hora_inicio" type="time" />
           </div>
         </div>
 
@@ -69,7 +67,7 @@
             <label>Fecha fin: </label>
           </div>
           <div class="col-md-8">
-            <input name="fecha_fin" type = "date" name = "desde" /> <label><i class="far fa-calendar-alt"></i></label>
+            <input name="fecha_fin" type="date" /> <label><i class="far fa-calendar-alt"></i></label>
           </div>
         </div>
         <div class = "row">
@@ -77,11 +75,11 @@
             <label>Hora fin: </label>
           </div>
           <div class="col-md-8">
-            <input name="hora_fin" type = "time" name = "asdad" />
+            <input name="hora_fin" type="time" />
           </div>
         </div>
         <div class = "row">
-          <button type="submit" class = "btn btn-primary float-right"> Pedir </button>
+          <button type="submit" class="btn btn-primary float-right"> Pedir </button>
         </div>
       </form>
 

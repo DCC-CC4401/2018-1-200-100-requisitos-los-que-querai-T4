@@ -1,5 +1,7 @@
 from django.contrib import admin
-from .models import Reservation
+from .models import ArticleReservation
+from .models import SpaceReservation
 
 # Register your models here.
-admin.site.register(Reservation)
+admin.site.register(ArticleReservation)
+admin.site.register(SpaceReservation)
