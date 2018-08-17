@@ -1,0 +1,45 @@
+{% extends 'application_layout.html' %}
+
+{% load static %}
+
+{% block title %}
+  Ficha del espacio: {{ space.name }}
+{% endblock %}
+
+{% block body %}
+wena men, vai bien sigue así
+    <div class="container">
+    <h2>Ficha</h2>
+    <div class="row">
+        <div class="col col-lg-5">
+            <table class="table">
+                <tr>
+                    <td>Nombre:</td>
+                    <td>{{ space.name }}</td>
+                </tr>
+                <tr>
+                    <td>Foto:</td>
+                    <td>AQUI VA LA FOTO</td>
+                </tr>
+                <tr>
+                    <td>Capacidad:</td>
+                    <td>{{ space.capacidad }}</td>
+                </tr>
+                <tr>
+                    <td>Descripción:</td>
+                    <td>{{ space.description }}</td>
+                </tr>
+                <tr>
+                    <td>Estado:</td>
+                    <td>{% if space.state == 'D' %} Disponible {% elif space.state == 'P' %} En préstamo {% else %} En reparación {% endif %}</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    
+
+
+
+
+    </div>
+{% endblock %}
