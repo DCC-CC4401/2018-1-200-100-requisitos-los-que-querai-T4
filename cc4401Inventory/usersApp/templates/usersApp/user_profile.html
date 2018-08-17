@@ -55,7 +55,7 @@
                 {% if reservations %}
                     <div class="row">
                         <!-- Nombre, Estado-->
-                        <div class="col-lg-3">
+                        <div class="col-lg-5">
                             <form id="formfield "method="post" action="{% url 'delete_reservation' %}">
                             {% csrf_token %}
                                 <div class="nav flex-column nav-pills"
@@ -64,6 +64,20 @@
                                      aria-orientation="vertical">
 
                                     {% for reservation in reservations %}
+
+                                        <div>
+                                            {% if reservation.state == 'P' %}
+                                                <input id="reservation-{{ reservation.id }}"
+                                                       name="reservation"
+                                                       type="checkbox"
+                                                       value="{{ reservation.id }}">
+                                            {% else %}
+                                                <input id="reservation-{{ reservation.id }}"
+                                                       name="reservation"
+                                                       type="checkbox"
+                                                       value="{{ reservation.id }}" disabled>
+                                            {% endif %}
+                                        </div>
 
                                         <!-- Tener seleccionado la primera casilla por default-->
 
@@ -77,20 +91,6 @@
                                            aria-controls="v-pills-{{ reservation.pk }}"
                                            aria-selected="false">
 
-                                            <div>
-                                            {% if reservation.state == 'P' %}
-                                                <input id="reservation-{{ reservation.id }}"
-                                                       name="reservation"
-                                                       type="checkbox"
-                                                       value="{{ reservation.id }}">
-                                            {% else %}
-                                                <input id="reservation-{{ reservation.id }}"
-                                                       name="reservation"
-                                                       type="checkbox"
-                                                       value="{{ reservation.id }}" disabled>
-                                            {% endif %}
-                                            </div>
-
                                             {{ reservation.space.name }}
                                             <span class="badge badge-pill badge-light">
                                                 {{ reservation.get_state_display }}
@@ -98,17 +98,18 @@
                                         </a>
                                     {% endfor %}
                                 </div>
+                                <br>
                                 <input class="delete-button"
                                        type="button"
                                        id="submitBtn"
                                        data-toggle="modal"
                                        data-target="#confirm-submit"
-                                       value="Eliminar Reservas">
+                                       value="Eliminar Reservas"/>
                             </form>
                         </div>
 
                         <!-- Contenido de cada objeto y/o espacio del resumen de reservas-->
-                        <div class="col-lg">
+                        <div class="col">
                             <div class="card mt-4">
                                 <div class="card-body">
                                     <div class="tab-content" id="v-pills-tabContent">
@@ -202,7 +203,7 @@
                     <div class="row">
 
                         <!-- Nombre, Estado-->
-                        <div class="col-lg-3">
+                        <div class="col-lg-5">
                             <div class="nav flex-column nav-pills"
                                  id="v-pills-tab"
                                  role="tablist"
@@ -231,7 +232,7 @@
                         </div>
 
                         <!-- Contenido de cada objeto y/o espacio del resumen de reservas-->
-                        <div class="col-lg-9">
+                        <div class="col">
                             <div class="card mt-4">
                                 <div class="card-body">
                                     <div class="tab-content" id="v-pills-tabContent">
@@ -345,13 +346,10 @@
 
 {% block scripts %}
     <script>
-        $('#submit').click(function(){
-            $('form').submit();
+        $(document).ready ( function () {
+            $(document).on ("click", "#submit", function () {
+                $("form").submit();
+            });
         });
-
-        $('input[type="checkbox"]').click(function() {
-            $(this).prop('checked','checked');
-        });
-
     </script>
 {% endblock %}
