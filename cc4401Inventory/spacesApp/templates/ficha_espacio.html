@@ -13,15 +13,15 @@
         </h2>
         <div class="row">
             <div class="col col-lg-5">
-                <table class="table">
-                    <tr>
-                        <td>Nombre:</td>
-                        <td>{{ space.name }}</td>
-                    </tr>
-                    <tr>
-                        <td>Foto:</td>
-                        <td>
-                            {% if loan.article.image %}
+                {% if admin == 0 %}
+            <table class="table">
+                <tr>
+                    <td>Nombre:</td>
+                    <td>{{ space.name }}</td>
+                </tr>
+                <tr>
+                    <td>Foto:</td>
+                    <td>{% if loan.article.image %}
                                 <img src=" {% static space.image.url %}"
                                      class="img-fluid"
                                      alt="Foto"/>
@@ -29,22 +29,56 @@
                                 <img class="card-img-top img-fluid"
                                      src="{% static 'img/items/default_article.jpg' %}"
                                      alt="Card image cap">
-                            {% endif %}
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Capacidad:</td>
-                        <td>{{ space.capacidad }}</td>
-                    </tr>
-                    <tr>
-                        <td>Descripción:</td>
-                        <td>{{ space.description }}</td>
-                    </tr>
-                    <tr>
-                        <td>Estado:</td>
-                        <td>{% if space.state == 'D' %} Disponible {% elif space.state == 'P' %} En préstamo {% else %} En reparación {% endif %}</td>
-                    </tr>
-                </table>
+                            {% endif %}</td>
+                </tr>
+                <tr>
+                    <td>Capacidad:</td>
+                    <td>{{ space.capacidad }}</td>
+                </tr>
+                <tr>
+                    <td>Descripción:</td>
+                    <td>{{ space.description }}</td>
+                </tr>
+                <tr>
+                    <td>Estado:</td>
+                    <td>{% if space.state == 'D' %} Disponible {% elif space.state == 'P' %} En préstamo {% else %} En reparación {% endif %}</td>
+                </tr>
+            </table>
+        {% else %}
+            <form action="{% url 'update_space' %}" method="post">
+            {% csrf_token %}
+            <input type="hidden" value="{{ space.id }}" name="id"/>
+            <table class="table">
+                <tr>
+                    <td>Nombre:</td>
+                    <td><input type="text" size="32" value="{{ space.name }}" name="name" style="width: 100%"/></td>
+                </tr>
+                <tr>
+                    <td>Foto:</td>
+                    <td><img src="{{ space.image }}"></td>
+                </tr>
+                <tr>
+                    <td>Capacidad:</td>
+                    <td><input type="text" size="32" value="{{ space.capacidad }}" name="capacidad" style="width: 100%"/></td>
+                </tr>
+                <tr>
+                    <td>Descripción:</td>
+                    <td><textarea name='description' style="width: 100%">{{ space.description }}</textarea></td>
+                </tr>
+                <tr>
+                    <td>Estado:</td>
+
+                    <td><input type="radio" name="status" value="D" {% if space.state == 'D' %}checked{% endif %}> Disponible<br>
+                            <input type="radio" name="status" value="P" {% if space.state == 'P' %}checked{% endif %}> En Préstamo<br>
+                            <input type="radio" name="status" value="R" {% if space.state == 'R' %}checked{% endif %}> En Reparación<br>
+                             </td>
+                </tr>
+            <tr><td></td>
+            <td><button type="submit" class="btn btn-primary" data-toggle="modal" data-target=".bd-example-modal-sm"> Actualizar Datos</button></td></tr>
+            </table>
+
+            </form>
+        {% endif %}
             </div>
             <div class="col">
                 <div class="cd-schedule loading">

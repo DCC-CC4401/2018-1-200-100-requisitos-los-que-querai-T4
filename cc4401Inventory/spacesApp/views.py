@@ -1,3 +1,4 @@
+from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.db import models
@@ -50,6 +51,11 @@ def ficha_espacio(request, space_id, date=None):
 
     try:
         space = Space.objects.get(id= space_id)
+        if request.user.is_staff:
+            admin = 1
+        else:
+            admin = 0
+        context = {'space' : space, 'admin': admin}
         admin = request.user.is_staff
         context = {'space' : space,
                    'reservations' : res_list,
@@ -59,5 +65,21 @@ def ficha_espacio(request, space_id, date=None):
                    'admin': admin}
         return render(request, 'ficha_espacio.html', context)
 
+
     except:
         return redirect('/')
+
+@login_required
+def update_space(request):
+    if request.method == 'POST':
+        id = request.POST['id']
+        space = Space.objects.get(pk=id)
+        space.name = request.POST['name']
+        space.capacidad = request.POST['capacidad']
+        space.description = request.POST['description']
+        space.state = request.POST['status']
+        space.save()
+        print("HOLAA")
+        return redirect('/space/' + id)
+    else:
+        return HttpResponse("Whoops!")
