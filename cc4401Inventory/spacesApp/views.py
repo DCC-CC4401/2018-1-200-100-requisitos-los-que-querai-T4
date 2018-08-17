@@ -13,7 +13,8 @@ from django.contrib import messages
 def ficha_espacio(request, space_id):
     try:
         space = Space.objects.get(id= space_id)
-        context = {'space' : space}
+        admin = request.user.is_staff
+        context = {'space' : space, 'admin': admin}
         return render(request, 'ficha_espacio.html', context)
 
 
