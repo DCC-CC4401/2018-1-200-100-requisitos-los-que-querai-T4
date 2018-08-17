@@ -50,11 +50,13 @@ def ficha_espacio(request, space_id, date=None):
 
     try:
         space = Space.objects.get(id= space_id)
+        admin = request.user.is_staff
         context = {'space' : space,
                    'reservations' : res_list,
                    'current_date' : current_date,
                    'controls' : move_controls,
-                   'actual_monday' : monday}
+                   'actual_monday' : monday,
+                   'admin': admin}
         return render(request, 'ficha_espacio.html', context)
 
     except:
