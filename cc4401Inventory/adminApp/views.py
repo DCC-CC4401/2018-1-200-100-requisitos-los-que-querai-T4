@@ -1,5 +1,5 @@
 from django.http import HttpResponse
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from reservationsApp.models import Reservation
 from loansApp.models import Loan
@@ -132,29 +132,36 @@ def modify_loans(request):
         return redirect('/')
     if request.method == "POST":
 
-        accept = True if (request.POST["accept"] == "1") \
+        received = True if (request.POST["received"] == "1") \
             else False
         loans = Loan.objects.filter(id__in=request.POST.getlist("selected-loan"))
-        if accept:
+        if received:
             for loan in loans:
-                loan.state = 'A'#corregir estado
+                loan.state = 'R'#corregir estado
                 loan.save()
         else:
             for loan in loans:
-                loan.state = 'R'#corregir estado
+                loan.state = 'P'#corregir estado
                 loan.save()
 
     return redirect('/admin/actions-panel')
 
 def create_article(request):
-    # user = request.user
-    # if not (user.is_superuser and user.is_staff):
-    #     return redirect('/')
+    user = request.user
+    if not (user.is_superuser and user.is_staff):
+        return redirect('/')
     if request.method == "POST":
-        name = request.POST['ArticleName']
-        state = request.POST['ArticleStateInput']
-        photo = request.POST['ArticlePhoto']
-        desc = request.POST['ArticleDesc']
+        articlename = request.POST['ArticleName']
+        articlestate = request.POST['ArticleStateInput']
+        articlephoto = request.FILES['ArticlePhoto']
+        articledesc = request.POST['ArticleDesc']
+        article = Article.objects.create(name= articlename, description= articledesc, image= articlephoto, state=articlestate)
+        article.save()
 
-    # return redirect('/admin/items-panel')
-    return HttpResponse("crear articulo: " + str(name))
+    return redirect('/admin/items-panel')
+    #return HttpResponse("crear articulo: " + str(name))
+
+def delete_article(request, article_id):
+    articulo= get_object_or_404(Article,pk=article_id)
+    articulo.delete()
+    return redirect('/admin/items-panel')
