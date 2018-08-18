@@ -55,7 +55,6 @@ def ficha_espacio(request, space_id, date=None):
             admin = 1
         else:
             admin = 0
-        context = {'space' : space, 'admin': admin}
         admin = request.user.is_staff
         context = {'space' : space,
                    'reservations' : res_list,
