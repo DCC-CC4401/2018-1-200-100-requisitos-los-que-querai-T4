@@ -56,7 +56,7 @@
                     <div class="row">
                         <!-- Nombre, Estado-->
                         <div class="col-lg-5">
-                            <form id="formfield "method="post" action="{% url 'delete_reservation' %}">
+                            <form id="formfield" method="post" action="{% url 'delete_reservation' %}">
                             {% csrf_token %}
                                 <div class="nav flex-column nav-pills"
                                      id="v-pills-tab"
@@ -109,7 +109,7 @@
                         </div>
 
                         <!-- Contenido de cada objeto y/o espacio del resumen de reservas-->
-                        <div class="col">
+                        <div class="col-lg-7">
                             <div class="card mt-4">
                                 <div class="card-body">
                                     <div class="tab-content" id="v-pills-tabContent">
@@ -232,7 +232,7 @@
                         </div>
 
                         <!-- Contenido de cada objeto y/o espacio del resumen de reservas-->
-                        <div class="col">
+                        <div class="col-lg-7">
                             <div class="card mt-4">
                                 <div class="card-body">
                                     <div class="tab-content" id="v-pills-tabContent">
@@ -323,7 +323,7 @@
         </div>
     </div>
 
-    <div id="confirm-submit" class="modal" tabindex="-1" role="dialog">
+    <div id="confirm-submit" class="modal fade" tabindex="-1" role="dialog">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
             <div class="modal-header">
