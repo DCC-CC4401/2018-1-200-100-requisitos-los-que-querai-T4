@@ -60,11 +60,11 @@ def actions_panel(request):
     try:
         if request.method == "GET":
             if request.GET["filter"]=='vigentes':
-                loans = Loan.objects.filter(ending_date_time__gt=actual_date).order_by('starting_date_time')
+                loans = Loan.objects.filter(ending_date_time__gt=actual_date, state='V').order_by('starting_date_time')
             elif request.GET["filter"]=='caducados':
-                loans = Loan.objects.filter(ending_date_time__lt=actual_date, article__state='P').order_by('starting_date_time')
+                loans = Loan.objects.filter(ending_date_time__lt=actual_date, state='V').order_by('starting_date_time')
             elif request.GET["filter"]=='perdidos':
-                loans = Loan.objects.filter(ending_date_time__lt=actual_date, article__state='L').order_by('starting_date_time')
+                loans = Loan.objects.filter(ending_date_time__lt=actual_date, state='Pe').order_by('starting_date_time')
             else:
                 loans = Loan.objects.all().order_by('starting_date_time')
     except:
@@ -137,12 +137,14 @@ def modify_loans(request):
         loans = Loan.objects.filter(id__in=request.POST.getlist("selected-loan"))
         if received:
             for loan in loans:
-                loan.state = 'R'#corregir estado
+                loan.state = 'Re'
                 loan.save()
         else:
             for loan in loans:
-                loan.state = 'P'#corregir estado
+                loan.state = 'Pe'
                 loan.save()
+                loan.article.state = 'L'
+                loan.article.save()
 
     return redirect('/admin/actions-panel')
 

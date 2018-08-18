@@ -5,9 +5,12 @@ from django.db import models
 
 class Loan(Action):
     STATES = (
+        ('A', 'Aceptado'),
+        ('R', 'Rechazado'),
+        ('P', 'Pendiente'),
         ('V', 'Vigente'),
-        ('R', 'Recibido'),
-        ('P', 'Perdido')
+        ('Re', 'Recibido'),
+        ('Pe', 'Perdido')
     )
-    state = models.CharField('Estado', choices=STATES, max_length=1, default='V')
+    state = models.CharField('Estado', choices=STATES, max_length=2, default='V')
     article = models.ForeignKey(Article, on_delete=models.CASCADE)
