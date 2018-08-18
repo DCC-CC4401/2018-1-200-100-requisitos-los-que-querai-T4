@@ -3,6 +3,8 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout
 from mainApp.models import User
 from django.contrib import messages
+from reservationsApp.models import Reservation
+from loansApp.models import Loan
 
 from reservationsApp.models import Reservation
 
@@ -107,7 +109,7 @@ def user_data(request, user_id):
         context = {
             'user': user,
             'reservations': reservations,
-            'loans': loans
+            'loans': loans,
         }
         return render(request, 'usersApp/user_profile.html', context)
     except Exception:

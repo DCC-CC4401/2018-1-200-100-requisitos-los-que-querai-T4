@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from articlesApp.models import Article
 from loansApp.models import Loan
+from reservationsApp.models import Reservation
 from django.db import models
 from datetime import datetime, timedelta
 
@@ -16,9 +17,7 @@ def article_data(request, article_id):
     try:
         article = Article.objects.get(id=article_id)
 
-        last_loans = Loan.objects.filter(article=article,
-                                         ending_date_time__lt=datetime.now(tz=pytz.utc)
-                                         ).order_by('-ending_date_time')[:10]
+        last_loans = Loan.objects.filter(article=article, ending_date_time__lt=datetime.now(tz=pytz.utc)).order_by('-ending_date_time')[:10]
 
         loan_list = list()
         for loan in last_loans:
@@ -40,6 +39,7 @@ def article_data(request, article_id):
         }
 
         return render(request, 'article_data.html', context)
+
     except Exception as e:
         print(e)
         return redirect('/')
@@ -74,9 +74,8 @@ def article_request(request):
                 elif not verificar_horario_habil(start_date_time) and not verificar_horario_habil(end_date_time):
                     messages.warning(request, 'Los pedidos deben ser hechos en horario hábil.')
                 else:
-                    loan = Loan(article=article, starting_date_time=start_date_time, ending_date_time=end_date_time,
-                                user=request.user)
-                    loan.save()
+                    reservation = Reservation(article=article, starting_date_time=start_date_time, ending_date_time=end_date_time, user=request.user)
+                    reservation.save()
                     messages.success(request, 'Pedido realizado con éxito')
             except Exception as e:
                 messages.warning(request, 'Ingrese una fecha y hora válida.')
@@ -134,3 +133,10 @@ def article_edit_description(request, article_id):
         a.save()
 
     return redirect('/article/' + str(article_id) + '/edit')
+
+@login_required
+def article_delete(request, article_id):
+    if request.method == "POST":
+        a = Article.objects.get(id=article_id)
+        a.delete()
+    return redirect('/admin/items-panel')

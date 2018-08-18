@@ -81,15 +81,15 @@ class Item(models.Model):
 
 
 class Action(models.Model):
+    starting_date_time = models.DateTimeField()
+    ending_date_time = models.DateTimeField()
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     STATES = (
         ('A', 'Aceptado'),
         ('R', 'Rechazado'),
         ('P', 'Pendiente')
     )
-    starting_date_time = models.DateTimeField()
-    ending_date_time = models.DateTimeField()
     state = models.CharField('Estado', choices=STATES, max_length=1, default='P')
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
 
     class Meta:
         abstract = True
