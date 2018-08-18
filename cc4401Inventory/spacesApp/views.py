@@ -26,9 +26,9 @@ def ficha_espacio(request, space_id, date=None):
             current_date = datetime.date.today().strftime("%Y-%m-%d")
 
     thisSpace = Space.objects.get(id=space_id)
-    reservations = Reservation.objects.filter(space=thisSpace, starting_date_time__week = current_week, state__in = ['P','A'])
+    reservations = Reservation.objects.filter(space=thisSpace, starting_date_time__week = current_week, state__in = ['V','A'])
     colores = {'A': 'rgba(0,153,0,0.7)',
-               'P': 'rgba(51,51,204,0.7)'}
+               'V': 'rgba(51,51,204,0.7)'}
 
     res_list = []
     for i in range(5):
