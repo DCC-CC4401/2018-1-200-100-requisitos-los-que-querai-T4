@@ -6,4 +6,6 @@ urlpatterns = [
     path('articles/', views.landing_articles, name='landing_articles'),
     path('spaces/', views.landing_spaces, name='landing_spaces'),
     path('search/', views.search, name='search'),
+    path('reservaEspacio', views.reservaEspacio, name='reservaEspacio'),
+    path('crearReserva', views.crearReserva, name='crearReserva'),
 ]

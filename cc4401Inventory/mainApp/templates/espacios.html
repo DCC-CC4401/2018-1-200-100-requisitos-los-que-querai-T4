@@ -31,7 +31,90 @@ Sistema de Reserva CEI - Ver Espacios
 
 </div>
 
+<div class="container">
 
+    <form action="{% url 'reservaEspacio' %}" align="middle" method="post">
+        {% csrf_token %}
+        <input type="datetime-local" name="t_inicio" id="t_inicio" required="true">
+        <input type="datetime-local" name="t_final" id="t_final" required="true">
+        <button type="submit" id="resButton" class="btn btn-info btn-lg" >Reservar</button>
+    </form>
+
+    <!--Boton que ejecuta el modal correspondiente -->
+    <button type="button" id="boton" class="btn" data-toggle="modal" data-target={{modal}}></button>
+
+    <!-- Modal reserva a menos de una hora-->
+    <div class="modal fade" id="myModal1" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Reserva Espacio</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <h6>Para reservar cualquier espacio debe hacerlo con al menos una hora de anticipación</h6>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal reserva a menos de 24 horas-->
+    <div class="modal fade" id="myModal2" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Reserva Espacio</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <form action="{% url 'crearReserva' %}" align="middle" method="post">
+                    {% csrf_token %}
+                    <div class="modal-body">
+                        <h6>Que espacio desea reservar?</h6>
+                        <input type="hidden" name='ini_time' value={{initial_datetime}}>
+                        <input type="hidden" name='fin_time' value={{final_datetime}}>
+                        <div class="row" style="padding-left: 35%; margin-top: 5%">
+                            <select name="espacio" id="espacio">{% for spaceOpt in spaceOptions %}
+                                <option value={{spaceOpt.id}}>{{ spaceOpt.name}}</option>
+                            {% endfor %}
+                          </select>
+                        </div>
+                        <h6 style="margin-top: 5%">*Recuerde que para reservar el quincho lo debe hacer con al menos 24 horas de anticipación.</h6>
+                    </div>
+                    <div class="modal-footer">
+                            <button type="submit" class="btn btn-info">Reservar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+
+
+
+{% endblock %}
+
+{% block scripts %}
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.0-alpha14/js/tempusdominus-bootstrap-4.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.0-alpha14/css/tempusdominus-bootstrap-4.min.css" />
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.0-alpha14/js/tempusdominus-bootstrap-4.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.0-alpha14/css/tempusdominus-bootstrap-4.min.css" />
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.1/js/tempusdominus-bootstrap-4.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.1/css/tempusdominus-bootstrap-4.min.css" />
+    <script type="text/javascript">
+        if({{modalState}}){
+            document.getElementById("boton").click();
+        }
+    </script>
 
 {% endblock %}
 
