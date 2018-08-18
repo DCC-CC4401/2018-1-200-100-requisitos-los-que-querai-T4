@@ -80,6 +80,6 @@ def update_space(request):
         space.state = request.POST['status']
         space.save()
         print("HOLAA")
-        return redirect('/space/' + id)
+        return redirect('/space/' + id + '?updated=True')
     else:
         return HttpResponse("Whoops!")

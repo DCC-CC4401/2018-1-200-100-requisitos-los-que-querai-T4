@@ -240,6 +240,12 @@
 {% endblock %}
 
 {% block scripts %}
+    <script>
+        {# Check update and send alert #}
+        if (window.location.search.substring(1).split("&")[0].split("=")[1] === "True"){
+            alert('Articulo Actualizado!')
+        }
+    </script>
     <script src="{% static 'js/modernizr.js' %}"></script>
     <script src="{% static 'js/jquery-3.0.0.min.js' %}"></script>
     <script src="{% static 'js/main.js' %}"></script> <!-- Resource jQuery -->
