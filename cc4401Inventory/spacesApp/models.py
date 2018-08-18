@@ -9,3 +9,4 @@ class Space(Item):
         ('R', 'En reparación')
     )
     state = models.CharField(max_length=1, choices=STATES)
+    capacidad = models.IntegerField()
