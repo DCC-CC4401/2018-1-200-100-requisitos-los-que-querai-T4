@@ -24,7 +24,8 @@
                     <td>{% if space.image %}
                                 <img src=" {% static space.image.url %}"
                                      class="img-fluid"
-                                     alt="Foto"/>
+                                     alt="Foto"
+                                     style="max-height: 400px"/>
                             {% else %}
                                 <img class="card-img-top img-fluid"
                                      src="{% static 'img/items/default_article.jpg' %}"
