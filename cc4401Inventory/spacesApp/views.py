@@ -25,7 +25,8 @@ def ficha_espacio(request, space_id, date=None):
             current_week = datetime.date.today().isocalendar()[1]
             current_date = datetime.date.today().strftime("%Y-%m-%d")
 
-    reservations = Reservation.objects.filter(starting_date_time__week = current_week, state__in = ['P','A'], id=space_id)
+    thisSpace = Space.objects.get(id=space_id)
+    reservations = Reservation.objects.filter(space=thisSpace, starting_date_time__week = current_week, state__in = ['P','A'])
     colores = {'A': 'rgba(0,153,0,0.7)',
                'P': 'rgba(51,51,204,0.7)'}
 
@@ -55,7 +56,6 @@ def ficha_espacio(request, space_id, date=None):
             admin = 1
         else:
             admin = 0
-        context = {'space' : space, 'admin': admin}
         admin = request.user.is_staff
         context = {'space' : space,
                    'reservations' : res_list,
