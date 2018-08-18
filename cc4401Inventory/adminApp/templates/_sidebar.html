@@ -1,17 +1,20 @@
 <div class="col-md-2 admin-sidebar">
   <ul class="nav flex-column">
     <li class="nav-item admin-sidebar-item">
-      <a class="nav-link align-items-center" href="{% url 'user-panel' %}">
+      <a class="nav-link align-items-center" href="{% url 'user-panel' %}" data-placement="top"
+         title="Administrar usuarios" data-toggle="tooltip">
         <i class="fas fa-user"></i>
       </a>
     </li>
     <li class="nav-item admin-sidebar-item">
-      <a class="nav-link" href="{% url 'items-panel' %}">
+      <a class="nav-link" href="{% url 'items-panel' %}" data-placement="top"
+         title="Administrar elementos" data-toggle="tooltip">
         <i class="fas fa-cart-plus"></i>
       </a>
     </li>
     <li class="nav-item admin-sidebar-item">
-      <a class="nav-link" href="{% url 'actions-panel' %}">
+      <a class="nav-link" href="{% url 'actions-panel' %}" data-placement="top"
+         title="Administrar acciones" data-toggle="tooltip">
         <i class="fas fa-clock"></i>
       </a>
     </li>
