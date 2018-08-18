@@ -51,20 +51,46 @@ def signup_submit(request):
         first_name = request.POST['first_name']
         last_name = request.POST['last_name']
         password = request.POST['password']
+        password2 = request.POST['password2']
         rut = request.POST['RUT']
 
+        #Validar que usuario existe
         if User.objects.filter(email = email).exists():
             messages.warning(request, 'Ya existe una cuenta con ese correo.')
             return redirect('/user/signup/')
+
+        #Validar que el formato de Rut sea valido
+        elif not rutIsValid(rut):
+            messages.warning(request, 'El rut no es valido')
+            return redirect('/user/signup/')
+
+        #Validar que rut existe
         elif User.objects.filter(rut = rut).exists():
             messages.warning(request, 'Ya existe una cuenta con ese rut')
             return redirect('/user/signup/')
+
+        #Validar que se haya repetido correctamente la contraseña
+        elif (password != password2):
+            messages.warning(request, 'Las contraseñas no coinciden')
+            return redirect('/user/signup/')
         else:
-            user = User.objects.create_user(first_name=first_name, email=email, password=password, rut = rut)
+            user = User.objects.create_user(first_name=first_name, last_name=last_name, email=email, password=password, rut = rut)
             login(request, user)
             messages.success(request, 'Bienvenid@, ' + user.first_name + ' ya puedes comenzar a hacer reservas :)')
             return redirect('/articles/')
 
+def rutIsValid(rut):
+    if len(rut) != 10:
+        return False
+    if rut[8] != '-':
+        return False
+    try:
+        int(rut.split("-")[0])
+        if isinstance(rut.split("-")[1], str):
+            return True
+        return False
+    except ValueError:
+        return False
 
 @login_required
 def logout_view(request):
