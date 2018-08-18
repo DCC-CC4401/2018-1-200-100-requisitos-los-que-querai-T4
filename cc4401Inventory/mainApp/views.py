@@ -38,7 +38,15 @@ def landing_spaces(request, date=None):
         res_list.append(list())
     for r in reservations:
         reserv = []
-        reserv.append(r.space.name)
+        reserv_state = r.state
+        str_state = ""
+        if(reserv_state == 'A'):
+            str_state = "Aceptado"
+        if(reserv_state == 'P'):
+            str_state = "Pendiente"
+        space_name = r.space.name + " - " + str_state
+        #reserv.append(r.space.name)
+        reserv.append(space_name)
         reserv.append(localtime(r.starting_date_time).strftime("%H:%M"))
         reserv.append(localtime(r.ending_date_time).strftime("%H:%M"))
         reserv.append(colores[r.state])
@@ -92,7 +100,15 @@ def landing_spaces_modal(request, modalActivado, spaces, ini_t, fin_t, date=None
         res_list.append(list())
     for r in reservations:
         reserv = []
-        reserv.append(r.space.name)
+        reserv_state = r.state
+        str_state = ""
+        if (reserv_state == 'A'):
+            str_state = "Aceptado"
+        if (reserv_state == 'P'):
+            str_state = "Pendiente"
+        space_name = r.space.name + " - " + str_state
+        # reserv.append(r.space.name)
+        reserv.append(space_name)
         reserv.append(localtime(r.starting_date_time).strftime("%H:%M"))
         reserv.append(localtime(r.ending_date_time).strftime("%H:%M"))
         reserv.append(colores[r.state])
@@ -222,7 +238,7 @@ def crearReserva(request):
         datetime_object3 = datetime.datetime.strptime(final_datetime, '%Y-%m-%dT%H:%M')
 
         #b = Blog(name='Beatles Blog', tagline='All the latest Beatles news.')
-        r = Reservation(space=espacioSel, starting_date_time=datetime_object2, ending_date_time=datetime_object3, state='Pendiente', user=request.user)
+        r = Reservation(space=espacioSel, starting_date_time=datetime_object2, ending_date_time=datetime_object3, state='P', user=request.user)
         r.save()
         return landing_spaces(request)
     else:
