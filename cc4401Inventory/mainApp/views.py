@@ -11,7 +11,10 @@ from django.http import HttpResponse
 
 @login_required
 def landing_articles(request):
-    context = {}
+    productos = Article.objects.all()
+    context = {
+        'productos' : productos
+    }
     return render(request, 'articulos.html', context)
 
 

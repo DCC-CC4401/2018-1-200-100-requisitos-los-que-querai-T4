@@ -44,19 +44,6 @@ Sistema de Reserva CEI - Ver Artículos
                     <div class="col-6">
                         <div class="input-group mb-3">
                             <div class="input-group-prepend">
-                                <label class="input-group-text" for="inputGroupSelect01">Tipo</label>
-                            </div>
-                            <select name="tipo" class="custom-select" id="inputGroupSelect01">
-                                <option selected value="">---</option>
-                                <option value="1">Tipo 1</option>
-                                <option value="2">Tipo 2</option>
-
-                            </select>
-                        </div>
-                    </div>
-                    <div class="col-6">
-                        <div class="input-group mb-3">
-                            <div class="input-group-prepend">
                                 <label class="input-group-text" for="inputGroupSelect02">Estado</label>
                             </div>
                             <select name="estado" class="custom-select" id="inputGroupSelect02">
@@ -84,7 +71,13 @@ Sistema de Reserva CEI - Ver Artículos
                   <img class="card-img-top" src="{% static 'img/items/default_article.jpg' %}" alt="Card image cap">
               {% endif %}
                 <div class="card-body" style="border-top: 1px solid #EAEAEA">
-                    <p class="card-text"><i class="fas fa-circle" style="color:{{ colores|get_item:producto.state }};"></i> {{producto.name}}</p>
+                    {% if producto.state == "D" %}
+                        <p class="card-text"><i class="fas fa-circle" style="color:green"></i> {{producto}}</p>
+                    {% elif producto.state == "P" %}
+                        <p class="card-text"><i class="fas fa-circle" style="color:yellow"></i> {{producto}}</p>
+                    {% elif producto.state == "R" or producto.state == "L" %}
+                        <p class="card-text"><i class="fas fa-circle" style="color:red"></i> {{producto}}</p>
+                    {% endif %}
                 </div>
             </a>
             </div>

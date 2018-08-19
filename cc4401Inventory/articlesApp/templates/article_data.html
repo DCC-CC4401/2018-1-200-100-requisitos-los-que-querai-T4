@@ -43,24 +43,24 @@
 
     <div class = "col-md-5 offset-2">
       <h3 class="block-title">Solicitar reserva</h3>
-      <form action="{% url  'article_request' %}" method="post" class="reservation-form">
+      <form action="{% url 'article_request' %}" method="post" class="reservation-form">
         {% csrf_token%}
         <input type="hidden" name="article_id" value="{{ article.id }}">
 
-        <div class = "row">
+        <div class="row">
           <div class="col-md-4">
             <label>Fecha inicio: </label>
           </div>
           <div class="col-md-8">
-            <input name="fecha_inicio" type = "date" name = "desde" /> <label><i class="far fa-calendar-alt"></i></label>
+            <input name="fecha_inicio" type="date" /> <label><i class="far fa-calendar-alt"></i></label>
           </div>
         </div>
-        <div class = "row">
+        <div class="row">
           <div class="col-md-4">
             <label>Hora inicio: </label>
           </div>
           <div class="col-md-8">
-            <input name="hora_inicio" type = "time" name = "asdad" />
+            <input name="hora_inicio" type="time" />
           </div>
         </div>
 
@@ -69,7 +69,7 @@
             <label>Fecha fin: </label>
           </div>
           <div class="col-md-8">
-            <input name="fecha_fin" type = "date" name = "desde" /> <label><i class="far fa-calendar-alt"></i></label>
+            <input name="fecha_fin" type="date" /> <label><i class="far fa-calendar-alt"></i></label>
           </div>
         </div>
         <div class = "row">
@@ -77,11 +77,11 @@
             <label>Hora fin: </label>
           </div>
           <div class="col-md-8">
-            <input name="hora_fin" type = "time" name = "asdad" />
+            <input name="hora_fin" type="time" />
           </div>
         </div>
-        <div class = "row">
-          <button type="submit" class = "btn btn-primary float-right"> Pedir </button>
+        <div class="row">
+          <button type="submit" class="btn btn-primary float-right"> Pedir </button>
         </div>
       </form>
 
@@ -90,7 +90,7 @@
             <div class="reservation-history">
                 <ul>
                     {% for elemento in last_loans %}
-                        <li>{{ elemento }}</li>
+                        <li>{{ elemento.article }}</li>
                     {% endfor %}
                 </ul>
             </div>
