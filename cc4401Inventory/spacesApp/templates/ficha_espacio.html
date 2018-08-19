@@ -30,7 +30,8 @@
                                 <img class="card-img-top img-fluid"
                                      src="{% static 'img/items/default_article.jpg' %}"
                                      alt="Card image cap">
-                            {% endif %}</td>
+                            {% endif %}
+                    </td>
                 </tr>
                 <tr>
                     <td>Capacidad:</td>
@@ -56,7 +57,17 @@
                 </tr>
                 <tr>
                     <td>Foto:</td>
-                    <td><img src="{{ space.image }}"></td>
+                    <td>{% if space.image %}
+                                <img src=" {% static space.image.url %}"
+                                     class="img-fluid"
+                                     alt="Foto"
+                                     style="max-height: 300px"/>
+                            {% else %}
+                                <img class="card-img-top img-fluid"
+                                     src="{% static 'img/items/default_article.jpg' %}"
+                                     alt="Card image cap">
+                            {% endif %}
+                    </td>
                 </tr>
                 <tr>
                     <td>Capacidad:</td>
