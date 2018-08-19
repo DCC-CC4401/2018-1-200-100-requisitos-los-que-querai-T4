@@ -1,4 +1,5 @@
-from django.shortcuts import render, redirect
+from django.http import HttpResponse
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from reservationsApp.models import Reservation
 from loansApp.models import Loan
@@ -26,10 +27,14 @@ def items_panel(request):
     if not (user.is_superuser and user.is_staff):
         return redirect('/')
     articles = Article.objects.all()
+    artistates = Article.STATES
     spaces = Space.objects.all()
+    spacestates = Space.STATES
     context = {
         'articles': articles,
-        'spaces': spaces
+        'articlestates': artistates,
+        'spaces': spaces,
+        'spacestates': spacestates
     }
     return render(request, 'items_panel.html', context)
 
@@ -49,21 +54,21 @@ def actions_panel(request):
                'P': 'rgba(51,51,204,0.7)',
                 'R': 'rgba(153, 0, 0,0.7)'}
 
-    reservations = Reservation.objects.filter(state='P').order_by('starting_date_time')
+    reservations = Reservation.objects.filter(state='P').order_by('-pk')
     current_week_reservations = Reservation.objects.filter(starting_date_time__week = current_week)
     actual_date = datetime.now(tz=pytz.utc)
     try:
         if request.method == "GET":
             if request.GET["filter"]=='vigentes':
-                loans = Loan.objects.filter(ending_date_time__gt=actual_date).order_by('starting_date_time')
+                loans = Loan.objects.filter(ending_date_time__gt=actual_date, state='V').order_by('starting_date_time')
             elif request.GET["filter"]=='caducados':
-                loans = Loan.objects.filter(ending_date_time__lt=actual_date, article__state='P').order_by('starting_date_time')
+                loans = Loan.objects.filter(ending_date_time__lt=actual_date, state='V').order_by('starting_date_time')
             elif request.GET["filter"]=='perdidos':
-                loans = Loan.objects.filter(ending_date_time__lt=actual_date, article__state='L').order_by('starting_date_time')
+                loans = Loan.objects.filter(ending_date_time__lt=actual_date, state='Pe').order_by('starting_date_time')
             else:
                 loans = Loan.objects.all().order_by('starting_date_time')
     except:
-        loans = Loan.objects.all().order_by('starting_date_time')
+        loans = Loan.objects.all().order_by('-pk')
 
     res_list = []
     for i in range(5):
@@ -109,7 +114,7 @@ def modify_reservations(request):
     if request.method == "POST":
 
         accept = True if (request.POST["accept"] == "1") else False
-        reservations = Reservation.objects.filter(id__in=request.POST["selected"])
+        reservations = Reservation.objects.filter(id__in=request.POST.getlist("selected"))
         if accept:
             for reservation in reservations:
                 reservation.state = 'A'
@@ -120,3 +125,45 @@ def modify_reservations(request):
                 reservation.save()
 
     return redirect('/admin/actions-panel')
+
+def modify_loans(request):
+    user = request.user
+    if not (user.is_superuser and user.is_staff):
+        return redirect('/')
+    if request.method == "POST":
+
+        received = True if (request.POST["received"] == "1") \
+            else False
+        loans = Loan.objects.filter(id__in=request.POST.getlist("selected-loan"))
+        if received:
+            for loan in loans:
+                loan.state = 'Re'
+                loan.save()
+        else:
+            for loan in loans:
+                loan.state = 'Pe'
+                loan.save()
+                loan.article.state = 'L'
+                loan.article.save()
+
+    return redirect('/admin/actions-panel')
+
+def create_article(request):
+    user = request.user
+    if not (user.is_superuser and user.is_staff):
+        return redirect('/')
+    if request.method == "POST":
+        articlename = request.POST['ArticleName']
+        articlestate = request.POST['ArticleStateInput']
+        articlephoto = request.FILES['ArticlePhoto']
+        articledesc = request.POST['ArticleDesc']
+        article = Article.objects.create(name= articlename, description= articledesc, image= articlephoto, state=articlestate)
+        article.save()
+
+    return redirect('/admin/items-panel')
+    #return HttpResponse("crear articulo: " + str(name))
+
+def delete_article(request, article_id):
+    articulo= get_object_or_404(Article,pk=article_id)
+    articulo.delete()
+    return redirect('/admin/items-panel')

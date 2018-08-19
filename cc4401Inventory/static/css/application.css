@@ -72,3 +72,49 @@ form button[type=submit]:hover {
     text-align: right;
     font-size: 12px;
 }
+th, td {
+    vertical-align: middle !important;
+}
+th, td:not(.not-center-td) {
+    text-align: center;
+}
+
+/*colores cei:
+verde: #79BCB5
+marron: #B95933
+naranjo: #D7753C
+amarillo: #E8B059
+ */
+.btn-amarillo {
+    color: white !important;
+    background-color: #E8B059 !important;
+    border-color: #E8B059 !important;
+}
+
+.btn-amarillo:hover {
+    color: white !important;
+    background-color: #d6a252 !important;
+    border-color: #d6a252 !important;
+}
+.btn-naranjo {
+    color: white !important;
+    background-color: #D7753C !important;
+    border-color: #D7753C !important;
+}
+.btn-naranjo:hover {
+    color: white !important;
+    background-color: #a54913 !important;
+    border-color: #a54913 !important;
+}
+
+.btn-marron {
+    color: white !important;
+    background-color: #B95933 !important;
+    border-color: #B95933 !important;
+}
+
+.btn-marron:hover {
+    color: white !important;
+    background-color: #994524 !important;
+    border-color: #994524 !important;
+}

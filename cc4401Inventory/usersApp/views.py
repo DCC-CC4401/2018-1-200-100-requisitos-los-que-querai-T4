@@ -104,8 +104,13 @@ def logout_view(request):
 def user_data(request, user_id):
     try:
         user = User.objects.get(id=user_id)
-        reservations = Reservation.objects.filter(user = user_id).order_by('-starting_date_time')[:10]
-        loans = Loan.objects.filter(user = user_id).order_by('-starting_date_time')[:10]
+
+        reservations_id = Reservation.objects.values_list('id').filter(user = user_id).order_by('-id')[:10]
+        reservations = Reservation.objects.filter(id__in=reservations_id).order_by('-starting_date_time')
+
+        loans_id = Loan.objects.values_list('id').filter(user = user_id).order_by('-id')[:10]
+        loans = Loan.objects.filter(id__in=loans_id).order_by('-starting_date_time')
+
         context = {
             'user': user,
             'reservations': reservations,

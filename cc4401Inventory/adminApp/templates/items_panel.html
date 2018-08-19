@@ -11,8 +11,77 @@
 	<div class="col-md-10">
     <div class="row">
       <div class="col-md-6 admin-table-container">
-        <h1>Articulos</h1>
-        <table class="table table-striped">
+        <h1>Artículos
+            <span data-toggle="modal" data-target="#modal-articles">
+                <button type="button" class="btn btn-modal" data-placement="top" title="Crear nuevo artículo" data-toggle="tooltip">
+                    <i class="fa fa-plus" aria-hidden="true"></i>
+                </button>
+            </span>
+        </h1>
+        <div class="modal fade" id="modal-articles" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                  <form class="needs-validation" action="{% url 'create_article' %}" method="post" enctype="multipart/form-data" novalidate>
+                        {% csrf_token %}
+                        <div class="modal-header">
+                            <h5 class="modal-title">Crear nuevo artículo</h5>
+                            <button type="button" class="close" data-dismiss="modal">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="container">
+                                <div class="form-row" style="padding-bottom: 10px">
+                                    <div class="col ">
+                                        <label for="ArticleName">Nombre</label>
+                                        <input type="text" class="form-control" id="ArticleName" name="ArticleName" placeholder="Nombre artículo" required>
+                                        <div class="invalid-feedback">
+                                            Nombre inválido
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="col-md-6 mb-3">
+                                        <label for="ArticleStateInput">Estado</label>
+                                        <select class="custom-select" id="ArticleStateInput" name="ArticleStateInput" required>
+                                            <option value="" selected disabled hidden >Elegir estado</option>
+                                            {% for opcion,valor in articlestates %}
+                                                <option value="{{ opcion }}">{{ valor }}</option>
+                                            {% endfor %}
+                                        </select>
+                                        <div class="invalid-feedback">
+                                            Campo obligatorio
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label for="ArticlePhoto">Fotografía</label>
+                                        <input type="file" class="form-control form-control-sm" id="ArticlePhoto" name="ArticlePhoto" required>
+                                        <div class="invalid-feedback">
+                                            Ningún archivo seleccionado
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="col" style="margin-bottom: 16px">
+                                        <label for="ArticleDesc">Descripción</label>
+                                        <input type="text" class="form-control" id="ArticleDesc" name="ArticleDesc" placeholder="Agrega una descripción del artículo" required>
+                                        <div class="invalid-feedback">
+                                            Texto inválido
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-marron" data-dismiss="modal">Cerrar</button>
+                            <button type="submit" class="btn btn-naranjo">Guardar</button>
+                        </div>
+                  </form>
+                </div>
+            </div>
+        </div>
+
+        <table class="table table-striped table-bordered">
           <thead>
           <tr>
             <th scope="col">ID</th>
@@ -26,10 +95,12 @@
           <tr>
             <td>{{ article.id }}</td>
             <td>{{ article.name }}</td>
-            <td>{{ article.state }}</td>
+            <td>{{ article.get_state_display }}</td>
             <td class="center-column">
-              <a class="table-button" href="{% url 'article_data_admin' article.id %}"><i class="fas fa-edit"></i></a>
-              <a class="table-button" href="#"><i class="fas fa-trash"></i></a>
+              <a class="table-button" href="{% url 'article_data_admin' article.id %}"
+                 data-toggle="tooltip" data-placement="top" title="Modificar este artículo"><i class="fas fa-edit"></i></a>
+              <a class="table-button" href="{% url 'delete_article' article.id %}"
+                 data-toggle="tooltip" data-placement="top" title="Eliminar este artículo"><i class="fas fa-trash"></i></a>
             </td>
           </tr>
           {% endfor %}
@@ -37,8 +108,75 @@
         </table>
       </div>
       <div class="col-md-6 admin-table-container">
-        <h1>Espacios</h1>
-        <table class="table table-striped">
+        <h1>Espacios
+            <span data-toggle="modal" data-target="#modal-spaces">
+                <button type="button" class="btn btn-modal" data-placement="top" title="Crear nuevo espacio" data-toggle="tooltip">
+                    <i class="fa fa-plus" aria-hidden="true"></i>
+                </button>
+            </span>
+        </h1>
+      <div class="modal fade" id="modal-spaces" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <form class="needs-validation" novalidate>
+                    <div class="modal-header">
+                        <h5 class="modal-title">Crear nuevo espacio</h5>
+                        <button type="button" class="close" data-dismiss="modal">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="container">
+                            <div class="form-row" style="padding-bottom: 10px">
+                                <div class="col ">
+                                    <label for="SpaceName">Nombre</label>
+                                    <input type="text" class="form-control" id="SpaceName" placeholder="Nombre espacio" required>
+                                    <div class="invalid-feedback">
+                                        Nombre inválido
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="col-md-6 mb-3">
+                                    <label for="SpaceStateInput">Estado</label>
+                                    <select class="custom-select" required>
+                                        <option value="" selected disabled hidden >Elegir estado</option>
+                                        {% for opcion,valor in spacestates %}
+                                            <option value="{{ opcion }}">{{ valor }}</option>
+                                        {% endfor %}
+                                    </select>
+                                    <div class="invalid-feedback">
+                                        Campo obligatorio
+                                    </div>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="SpacePhoto">Fotografía</label>
+                                    <input type="file" class="form-control form-control-sm" id="SpacePhoto"  required>
+                                    <div class="invalid-feedback">
+                                        Ningún archivo seleccionado
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="col" style="margin-bottom: 16px">
+                                    <label for="SpaceDesc">Descripción</label>
+                                    <input type="text" class="form-control" id="SpaceDesc" placeholder="Agrega una descripción del espacio" required>
+                                    <div class="invalid-feedback">
+                                        Texto inválido
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-marron" data-dismiss="modal">Cerrar</button>
+                        <button type="submit" class="btn btn-naranjo">Guardar</button>
+                    </div>
+                    </form>
+            </div>
+        </div>
+      </div>
+        <table class="table table-striped table-bordered">
           <thead>
           <tr>
             <th scope="col">ID</th>
@@ -54,8 +192,10 @@
             <td>{{ space.name }}</td>
             <td>{{ space.get_state_display }}</td>
             <td class="center-column">
-              <a class="table-button" href="#"><i class="fas fa-edit"></i></a>
-              <a class="table-button" href="#"><i class="fas fa-trash"></i></a>
+              <a class="table-button" href="#"
+                 data-toggle="tooltip" data-placement="top" title="Modificar este espacio"><i class="fas fa-edit"></i></a>
+              <a class="table-button" href="#"
+                 data-toggle="tooltip" data-placement="top" title="Eliminar este espacio"><i class="fas fa-trash"></i></a>
             </td>
           </tr>
           {% endfor %}
@@ -67,3 +207,33 @@
 </div>
 </div>
 {% endblock %}
+{% block scripts %}
+    <script>
+    // No permite submits de formularios invalidos
+    (function() {
+        'use strict';
+        window.addEventListener('load', function() {
+            // Busca todos los formularios a los que les queremos aplicar validacion
+            var forms = document.getElementsByClassName('needs-validation');
+            // Loopea sobre ellos y no permite submit si no está todo validado
+            var validation = Array.prototype.filter.call(forms, function(form) {
+                form.addEventListener('submit', function(event) {
+                    if (form.checkValidity() === false) {
+                        event.preventDefault();
+                        event.stopPropagation();
+                    }
+                    form.classList.add('was-validated');
+                    }, false);
+            });
+            }, false);
+    })();
+    </script>
+    <script>
+    // activa tooltips
+    $(function () {
+        $('[data-toggle="tooltip"]').tooltip()
+    })
+    </script>
+{% endblock %}
+
+

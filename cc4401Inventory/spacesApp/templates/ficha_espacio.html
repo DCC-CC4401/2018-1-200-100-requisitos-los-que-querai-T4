@@ -21,10 +21,11 @@
                 </tr>
                 <tr>
                     <td>Foto:</td>
-                    <td>{% if loan.article.image %}
+                    <td>{% if space.image %}
                                 <img src=" {% static space.image.url %}"
                                      class="img-fluid"
-                                     alt="Foto"/>
+                                     alt="Foto"
+                                     style="max-height: 300px"/>
                             {% else %}
                                 <img class="card-img-top img-fluid"
                                      src="{% static 'img/items/default_article.jpg' %}"
