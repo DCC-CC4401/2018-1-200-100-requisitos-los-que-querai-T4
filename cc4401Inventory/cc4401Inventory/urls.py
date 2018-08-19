@@ -27,4 +27,5 @@ urlpatterns = [
     path('article/', include('articlesApp.urls')),
     path('reservation/', include('reservationsApp.urls')),
     path('space/', include('spacesApp.urls')),
+    path('loan/', include('loansApp.urls')),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

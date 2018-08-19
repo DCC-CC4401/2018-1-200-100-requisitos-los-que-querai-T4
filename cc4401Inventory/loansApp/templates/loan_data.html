@@ -1,0 +1,77 @@
+
+{% extends 'application_layout.html' %}
+
+{% load static %}
+
+{% block title %}
+    {% if loan.state == "A" or loan.state == "R" or loan.state == "P" %}Ficha Reserva
+    {% else %}Ficha Préstamo
+    {% endif %}
+{% endblock %}
+
+
+{% block body %}
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <h2>{% if loan.state == "A" or loan.state == "R" or loan.state == "P" %}Ficha Reserva
+                    {% else %}Ficha Préstamo
+                    {% endif %}</h2>
+                <table class="table">
+                <tr>
+                    <td>Usuario:</td>
+                    <td>{{ loan.user }}</td>
+                </tr>
+                <tr>
+                    <td>Estado:</td>
+                    {% if loan.state == "A" or loan.state == "V" %}
+                        <td><span class="badge badge-pill badge-success"><i class="fas fa-chevron-left"></i> {{  loan.get_state_display }}</span></td>
+                    {% elif loan.state == "R" or loan.state == "Pe" %}
+                        <td><span class="badge badge-pill badge-danger"><i class="fas fa-chevron-left"></i> {{  loan.get_state_display }}</span></td>
+                    {% elif loan.state == "P" %}
+                        <td><span class="badge badge-pill badge-warning"><i class="fas fa-chevron-left"></i> {{  loan.get_state_display }}</span></td>
+                    {% elif loan.state == "Re" %}
+                        <td><span class="badge badge-pill badge-primary"><i class="fas fa-chevron-left"></i> {{  loan.get_state_display }}</span></td>
+                    {% endif %}
+                </tr>
+                <tr>
+                    <td>Fecha de inicio:</td>
+                    <td>{{ loan.starting_date_time }}</td>
+                </tr>
+                <tr>
+                    <td>Fecha de termino:</td>
+                    <td>{{ loan.ending_date_time }}</td>
+                </tr>
+                </table>
+            {% if loan.user == user %}
+                {% if loan.state == "V" %}
+                    <form method="POST" action="{% url 'lost_request' loan.id %}"> {% csrf_token %}
+                        <button type="submit" class="btn btn-warning float-left">Declarar perdido</button>
+                    </form>
+                {% elif loan.state == "P" or loan.state == "A" %}
+                    <form method="POST" action="{% url 'cancel_request' loan.id %}"> {% csrf_token %}
+                        <button type="submit" class="btn btn-danger float-left">Cancelar reserva</button>
+                    </form>
+                {% endif %}
+            {% endif %}
+            </div>
+            <div class="col">
+                <h2>{{ loan.article }}<small>
+                {% if loan.article.state == "D" %}
+                    <span class="badge badge-pill badge-success"><i class="fas fa-chevron-left"></i> {{  loan.article.get_state_display }}</span>
+                {% elif loan.article.state == "P" %}
+                    <span class="badge badge-pill badge-primary"><i class="fas fa-chevron-left"></i> {{  loan.article.get_state_display }}</span>
+                {% elif loan.article.state == "L" %}
+                    <span class="badge badge-pill badge-danger"><i class="fas fa-chevron-left"></i> {{  loan.article.get_state_display }}</span>
+                {% elif loan.article.state == "R" %}
+                    <span class="badge badge-pill badge-warning"><i class="fas fa-chevron-left"></i> {{  loan.article.get_state_display }}</span>
+                {% endif %}</small></h2>
+                <p>{% if loan.article.image %}
+                    <img src=" {% static loan.article.image.url %}" class="img-fluid" alt="Foto" style="max-height: 400px"/>
+                {% else %}
+                    <img class="card-img-top img-fluid" src="{% static 'img/items/default_article.jpg' %}" alt="Card image cap">
+                {% endif %}</p>
+            </div>
+        </div>
+    </div>
+{% endblock %}
