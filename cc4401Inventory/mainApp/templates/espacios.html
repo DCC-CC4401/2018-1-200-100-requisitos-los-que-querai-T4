@@ -18,7 +18,7 @@
                     Artículos
                 </a>
                 <a href="" class="btn btn-success disabled" role="button" aria-disabled="true">
-                    Espacio
+                    Espacios
                 </a>
             </div>
         </div>
@@ -123,549 +123,656 @@
     <script src="{% static 'js/jquery-3.0.0.min.js' %}"></script>
     <script src="{% static 'js/main.js' %}"></script> <!-- Resource jQuery -->
     <script>
-        $('#Click').click(function () {
-
-            $(this).toggleClass('clicked');
-
+        var array = [];
+    </script>
+    <script>
+        var hora_ini =[];
+        var hora_fin =[];
+        var dias = []
+        $('#resButton').click(function(){
+            var i;
+            for(i = 0; i < array.length; i++){
+                hora_ini.push(array[i].attr('data-start'));
+                hora_fin.push(array[i].attr('data-end'));
+                dias.push(array[i].attr('id').substr(0, array[i].attr('id').length) - 8);
+            }
         });
     </script>
     <script>
-        $('#Click1').click(function () {
+        $('#Lunes09000930').click(function () {
 
             $(this).toggleClass('clicked');
+            array.push($(this));
         });
     </script>
     <script>
-        $('#Click2').click(function () {
+        $('#Lunes09301000').click(function () {
 
             $(this).toggleClass('clicked');
+            array.push($(this));
         });
     </script>
     <script>
-        $('#Click3').click(function () {
+        $('#Lunes10001030').click(function () {
 
             $(this).toggleClass('clicked');
+            array.push($(this));
         });
     </script>
     <script>
-        $('#Click4').click(function () {
+        $('#Lunes10301100').click(function () {
 
             $(this).toggleClass('clicked');
+            array.push($(this));
         });
     </script>
     <script>
-        $('#Click5').click(function () {
+        $('#Lunes11001130').click(function () {
 
             $(this).toggleClass('clicked');
+            array.push($(this));
         });
     </script>
     <script>
-        $('#Click6').click(function () {
+        $('#Lunes11301200').click(function () {
 
             $(this).toggleClass('clicked');
+            array.push($(this));
         });
     </script>
     <script>
-        $('#Click7').click(function () {
+        $('#Lunes12001230').click(function () {
 
             $(this).toggleClass('clicked');
+            array.push($(this));
         });
     </script>
     <script>
-        $('#Click8').click(function () {
+        $('#Lunes12301300').click(function () {
 
             $(this).toggleClass('clicked');
+            array.push($(this));
         });
     </script>
     <script>
-        $('#Click9').click(function () {
+        $('#Lunes13001330').click(function () {
 
             $(this).toggleClass('clicked');
+            array.push($(this));
         });
     </script>
     <script>
-        $('#Click10').click(function () {
+        $('#Lunes13301400').click(function () {
 
             $(this).toggleClass('clicked');
+            array.push($(this));
         });
     </script>
     <script>
-        $('#Click11').click(function () {
+        $('#Lunes14001430').click(function () {
 
             $(this).toggleClass('clicked');
+            array.push($(this));
         });
     </script>
     <script>
-        $('#Click12').click(function () {
+        $('#Lunes14301500').click(function () {
 
             $(this).toggleClass('clicked');
+            array.push($(this));
         });
     </script>
     <script>
-        $('#Click13').click(function () {
+        $('#Lunes15001530').click(function () {
 
             $(this).toggleClass('clicked');
+            array.push($(this));
         });
     </script>
     <script>
-        $('#Click14').click(function () {
+        $('#Lunes15301600').click(function () {
 
             $(this).toggleClass('clicked');
+            array.push($(this));
         });
     </script>
     <script>
-        $('#Click15').click(function () {
+        $('#Lunes16001630').click(function () {
 
             $(this).toggleClass('clicked');
+            array.push($(this));
         });
     </script>
     <script>
-        $('#Click16').click(function () {
+        $('#Lunes16301700').click(function () {
 
             $(this).toggleClass('clicked');
+            array.push($(this));
         });
     </script>
     <script>
-        $('#Click17').click(function () {
+        $('#Lunes17001730').click(function () {
 
             $(this).toggleClass('clicked');
+            array.push($(this));
+        });
+    </script>
+    <script>
+        $('#Lunes17301800').click(function () {
+
+            $(this).toggleClass('clicked');
+            array.push($(this));
         });
     </script>
 
     <!-- Martes -->
     <script>
-        $('#Click0-2').click(function () {
+        $('#Martes09000930').click(function () {
 
             $(this).toggleClass('clicked');
+            array.push($(this));
         });
     </script>
     <script>
-        $('#Click1-2').click(function () {
+        $('#Martes09301000').click(function () {
 
             $(this).toggleClass('clicked');
+            array.push($(this));
         });
     </script>
     <script>
-        $('#Click2-2').click(function () {
+        $('#Martes10001030').click(function () {
 
             $(this).toggleClass('clicked');
+            array.push($(this));
         });
     </script>
     <script>
-        $('#Click3-2').click(function () {
+        $('#Martes10301100').click(function () {
 
             $(this).toggleClass('clicked');
+            array.push($(this));
         });
     </script>
     <script>
-        $('#Click4-2').click(function () {
+        $('#Martes11001130').click(function () {
 
             $(this).toggleClass('clicked');
+            array.push($(this));
         });
     </script>
     <script>
-        $('#Click5-2').click(function () {
+        $('#Martes11301200').click(function () {
 
             $(this).toggleClass('clicked');
+            array.push($(this));
         });
     </script>
     <script>
-        $('#Click6-2').click(function () {
+        $('#Martes12001230').click(function () {
 
             $(this).toggleClass('clicked');
+            array.push($(this));
         });
     </script>
     <script>
-        $('#Click7-2').click(function () {
+        $('#Martes12301300').click(function () {
 
             $(this).toggleClass('clicked');
+            array.push($(this));
         });
     </script>
     <script>
-        $('#Click8-2').click(function () {
+        $('#Martes13001330').click(function () {
 
             $(this).toggleClass('clicked');
+            array.push($(this));
         });
     </script>
     <script>
-        $('#Click9-2').click(function () {
+        $('#Martes13301400').click(function () {
 
             $(this).toggleClass('clicked');
+            array.push($(this));
         });
     </script>
     <script>
-        $('#Click10-2').click(function () {
+        $('#Martes14001430').click(function () {
 
             $(this).toggleClass('clicked');
+            array.push($(this));
         });
     </script>
     <script>
-        $('#Click11-2').click(function () {
+        $('#Martes14301500').click(function () {
 
             $(this).toggleClass('clicked');
+            array.push($(this));
         });
     </script>
     <script>
-        $('#Click12-2').click(function () {
+        $('#Martes15001530').click(function () {
 
             $(this).toggleClass('clicked');
+            array.push($(this));
         });
     </script>
     <script>
-        $('#Click13-2').click(function () {
+        $('#Martes15301600').click(function () {
 
             $(this).toggleClass('clicked');
+            array.push($(this));
         });
     </script>
     <script>
-        $('#Click14-2').click(function () {
+        $('#Martes16001630').click(function () {
 
             $(this).toggleClass('clicked');
+            array.push($(this));
         });
     </script>
     <script>
-        $('#Click15-2').click(function () {
+        $('#Martes16301700').click(function () {
 
             $(this).toggleClass('clicked');
+            array.push($(this));
         });
     </script>
     <script>
-        $('#Click16-2').click(function () {
+        $('#Martes17001730').click(function () {
 
             $(this).toggleClass('clicked');
+            array.push($(this));
         });
     </script>
     <script>
-        $('#Click17-2').click(function () {
+        $('#Martes17301800').click(function () {
 
             $(this).toggleClass('clicked');
+            array.push($(this));
         });
     </script>
 
     <!-- Miercoles -->
     <script>
-        $('#Click0-3').click(function () {
+        $('#Miercoles09000930').click(function () {
 
             $(this).toggleClass('clicked');
+            array.push($(this));
         });
     </script>
     <script>
-        $('#Click1-3').click(function () {
+        $('#Miercoles09301000').click(function () {
 
             $(this).toggleClass('clicked');
+            array.push($(this));
         });
     </script>
     <script>
-        $('#Click2-3').click(function () {
+        $('#Miercoles10001030').click(function () {
 
             $(this).toggleClass('clicked');
+            array.push($(this));
         });
     </script>
     <script>
-        $('#Click3-3').click(function () {
+        $('#Miercoles10301100').click(function () {
 
             $(this).toggleClass('clicked');
+            array.push($(this));
         });
     </script>
     <script>
-        $('#Click4-3').click(function () {
+        $('#Miercoles11001130').click(function () {
 
             $(this).toggleClass('clicked');
+            array.push($(this));
         });
     </script>
     <script>
-        $('#Click5-3').click(function () {
+        $('#Miercoles11301200').click(function () {
 
             $(this).toggleClass('clicked');
+            array.push($(this));
         });
     </script>
     <script>
-        $('#Click6-3').click(function () {
+        $('#Miercoles12001230').click(function () {
 
             $(this).toggleClass('clicked');
+            array.push($(this));
         });
     </script>
     <script>
-        $('#Click7-3').click(function () {
+        $('#Miercoles12301300').click(function () {
 
             $(this).toggleClass('clicked');
+            array.push($(this));
         });
     </script>
     <script>
-        $('#Click8-3').click(function () {
+        $('#Miercoles13001330').click(function () {
 
             $(this).toggleClass('clicked');
+            array.push($(this));
         });
     </script>
     <script>
-        $('#Click9-3').click(function () {
+        $('#Miercoles13301400').click(function () {
 
             $(this).toggleClass('clicked');
+            array.push($(this));
         });
     </script>
     <script>
-        $('#Click10-3').click(function () {
+        $('#Miercoles14001430').click(function () {
 
             $(this).toggleClass('clicked');
+            array.push($(this));
         });
     </script>
     <script>
-        $('#Click11-3').click(function () {
+        $('#Miercoles14301500').click(function () {
 
             $(this).toggleClass('clicked');
+            array.push($(this));
         });
     </script>
     <script>
-        $('#Click12-3').click(function () {
+        $('#Miercoles15001530').click(function () {
 
             $(this).toggleClass('clicked');
+            array.push($(this));
         });
     </script>
     <script>
-        $('#Click13-3').click(function () {
+        $('#Miercoles15301600').click(function () {
 
             $(this).toggleClass('clicked');
+            array.push($(this));
         });
     </script>
     <script>
-        $('#Click14-3').click(function () {
+        $('#Miercoles16001630').click(function () {
 
             $(this).toggleClass('clicked');
+            array.push($(this));
         });
     </script>
     <script>
-        $('#Click15-3').click(function () {
+        $('#Miercoles16301700').click(function () {
 
             $(this).toggleClass('clicked');
+            array.push($(this));
         });
     </script>
     <script>
-        $('#Click16-3').click(function () {
+        $('#Miercoles17001730').click(function () {
 
             $(this).toggleClass('clicked');
+            array.push($(this));
         });
     </script>
     <script>
-        $('#Click17-3').click(function () {
+        $('#Miercoles17301800').click(function () {
 
             $(this).toggleClass('clicked');
+            array.push($(this));
         });
     </script>
 
     <!-- Jueves -->
     <script>
-        $('#Click0-4').click(function () {
+        $('#Jueves09000930').click(function () {
 
             $(this).toggleClass('clicked');
+            array.push($(this));
         });
     </script>
     <script>
-        $('#Click1-4').click(function () {
+        $('#Jueves09301000').click(function () {
 
             $(this).toggleClass('clicked');
+            array.push($(this));
         });
     </script>
     <script>
-        $('#Click2-4').click(function () {
+        $('#Jueves10001030').click(function () {
 
             $(this).toggleClass('clicked');
+            array.push($(this));
         });
     </script>
     <script>
-        $('#Click3-4').click(function () {
+        $('#Jueves10301100').click(function () {
 
             $(this).toggleClass('clicked');
+            array.push($(this));
         });
     </script>
     <script>
-        $('#Click4-4').click(function () {
+        $('#Jueves11001130').click(function () {
 
             $(this).toggleClass('clicked');
+            array.push($(this));
         });
     </script>
     <script>
-        $('#Click5-4').click(function () {
+        $('#Jueves11301200').click(function () {
 
             $(this).toggleClass('clicked');
+            array.push($(this));
         });
     </script>
     <script>
-        $('#Click6-4').click(function () {
+        $('#Jueves12001230').click(function () {
 
             $(this).toggleClass('clicked');
+            array.push($(this));
         });
     </script>
     <script>
-        $('#Click7-4').click(function () {
+        $('#Jueves12301300').click(function () {
 
             $(this).toggleClass('clicked');
+            array.push($(this));
         });
     </script>
     <script>
-        $('#Click8-4').click(function () {
+        $('#Jueves13001330').click(function () {
 
             $(this).toggleClass('clicked');
+            array.push($(this));
         });
     </script>
     <script>
-        $('#Click9-4').click(function () {
+        $('#Jueves13301400').click(function () {
 
             $(this).toggleClass('clicked');
+            array.push($(this));
         });
     </script>
     <script>
-        $('#Click10-4').click(function () {
+        $('#Jueves14001430').click(function () {
 
             $(this).toggleClass('clicked');
+            array.push($(this));
         });
     </script>
     <script>
-        $('#Click11-4').click(function () {
+        $('#Jueves14301500').click(function () {
 
             $(this).toggleClass('clicked');
+            array.push($(this));
         });
     </script>
     <script>
-        $('#Click12-4').click(function () {
+        $('#Jueves15001530').click(function () {
 
             $(this).toggleClass('clicked');
+            array.push($(this));
         });
     </script>
     <script>
-        $('#Click13-4').click(function () {
+        $('#Jueves15301600').click(function () {
 
             $(this).toggleClass('clicked');
+            array.push($(this));
         });
     </script>
     <script>
-        $('#Click14-4').click(function () {
+        $('#Jueves16001630').click(function () {
 
             $(this).toggleClass('clicked');
+            array.push($(this));
         });
     </script>
     <script>
-        $('#Click15-4').click(function () {
+        $('#Jueves16301700').click(function () {
 
             $(this).toggleClass('clicked');
+            array.push($(this));
         });
     </script>
     <script>
-        $('#Click16-4').click(function () {
+        $('#Jueves17001730').click(function () {
 
             $(this).toggleClass('clicked');
+            array.push($(this));
         });
     </script>
     <script>
-        $('#Click17-4').click(function () {
+        $('#Jueves17301800').click(function () {
 
             $(this).toggleClass('clicked');
+            array.push($(this));
         });
     </script>
 
     <!-- Viernes -->
     <script>
-        $('#Click0-5').click(function () {
+        $('#Viernes09000930').click(function () {
 
             $(this).toggleClass('clicked');
+            array.push($(this));
         });
     </script>
     <script>
-        $('#Click1-5').click(function () {$(this).toggleClass('clicked');
-        });
-    </script>
-    <script>
-        $('#Click2-5').click(function () {
+        $('#Viernes09301000').click(function () {
 
             $(this).toggleClass('clicked');
+            array.push($(this));
         });
     </script>
     <script>
-        $('#Click3-5').click(function () {
+        $('#Viernes10001030').click(function () {
 
             $(this).toggleClass('clicked');
+            array.push($(this));
         });
     </script>
     <script>
-        $('#Click4-5').click(function () {
+        $('#Viernes10301100').click(function () {
 
             $(this).toggleClass('clicked');
+            array.push($(this));
         });
     </script>
     <script>
-        $('#Click5-5').click(function () {
+        $('#Viernes11001130').click(function () {
 
             $(this).toggleClass('clicked');
+            array.push($(this));
         });
     </script>
     <script>
-        $('#Click6-5').click(function () {
+        $('#Viernes11301200').click(function () {
 
             $(this).toggleClass('clicked');
+            array.push($(this));
         });
     </script>
     <script>
-        $('#Click7-5').click(function () {
+        $('#Viernes12001230').click(function () {
 
             $(this).toggleClass('clicked');
+            array.push($(this));
         });
     </script>
     <script>
-        $('#Click8-5').click(function () {
+        $('#Viernes12301300').click(function () {
+
+            $(this).toggleClass('clicked');
+            array.push($(this));
+        });
+    </script>
+    <script>
+        $('#Viernes13001330').click(function () {
 
            $(this).toggleClass('clicked');
+           array.push($(this));
         });
     </script>
     <script>
-        $('#Click9-5').click(function () {
+        $('#Viernes13301400').click(function () {
 
             $(this).toggleClass('clicked');
+            array.push($(this));
         });
     </script>
     <script>
-        $('#Click10-5').click(function () {
+        $('#Viernes14001430').click(function () {
 
             $(this).toggleClass('clicked');
+            array.push($(this));
         });
     </script>
     <script>
-        $('#Click11-5').click(function () {
+        $('#Viernes14301500').click(function () {
 
             $(this).toggleClass('clicked');
+            array.push($(this));
         });
     </script>
     <script>
-        $('#Click12-5').click(function () {
+        $('#Viernes15001530').click(function () {
 
             $(this).toggleClass('clicked');
+            array.push($(this));
         });
     </script>
     <script>
-        $('#Click13-5').click(function () {
+        $('#Viernes15301600').click(function () {
 
             $(this).toggleClass('clicked');
+            array.push($(this));
         });
     </script>
     <script>
-        $('#Click14-5').click(function () {
+        $('#Viernes16001630').click(function () {
 
             $(this).toggleClass('clicked');
+            array.push($(this));
         });
     </script>
     <script>
-        $('#Click15-5').click(function () {
+        $('#Viernes16301700').click(function () {
 
             $(this).toggleClass('clicked');
+            array.push($(this));
         });
     </script>
     <script>
-        $('#Click16-5').click(function () {
+        $('#Viernes17001730').click(function () {
 
             $(this).toggleClass('clicked');
+            array.push($(this));
         });
     </script>
     <script>
-        $('#Click17-5').click(function () {
+        $('#Viernes17301800').click(function () {
             $(this).toggleClass('clicked');
+            array.push($(this));
         });
     </script>
 {% endblock %}

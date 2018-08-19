@@ -26,183 +26,184 @@
 	<div id="line" class="clock"></div><div class="message" id="message"></div>
 		</div>
 	<div class="events" id="events">
-		<ul>
-			<li class="events-group">
-				<div class="top-info"><span>Lunes</span></div>
+        <form method="get" action="{% url 'search' %}">
+            <ul>
+                <li class="events-group">
+                    <div class="top-info"><span>Lunes</span></div>
 
-				<ul id="Lunes">
-					{% for r in reservations.0 %}
+                    <ul id="Lunes">
+                        {% for r in reservations.0 %}
 
-					<li class="single-event" data-start="{{r.1}}" data-end="{{r.2}}" bgcolor="{{r.3}}">
-						<a href="">
-							<em class="event-name">{{r.0}}</em>
-						</a>
-					</li>
+                        <li class="single-event" data-start="{{r.1}}" data-end="{{r.2}}" bgcolor="{{r.3}}">
+                            <a href="">
+                                <em class="event-name">{{r.0}}</em>
+                            </a>
+                        </li>
 
-					{% endfor%}
-                    <li class="single-event" id='Click' data-start="09:00" data-end="09:30" style="border-style: none"></li>
-                    <li class="single-event" id='Click1' data-start="09:30" data-end="10:00" style="border-style: none"></li>
-                    <li class="single-event" id='Click2' data-start="10:00" data-end="10:30" style="border-style: none"></li>
-                    <li class="single-event" id='Click3' data-start="10:30" data-end="11:00" style="border-style: none"></li>
-                    <li class="single-event" id='Click4' data-start="11:00" data-end="11:30" style="border-style: none"></li>
-                    <li class="single-event" id='Click5' data-start="11:30" data-end="12:00" style="border-style: none"></li>
-                    <li class="single-event" id='Click6' data-start="12:00" data-end="12:30" style="border-style: none"></li>
-                    <li class="single-event" id='Click7' data-start="12:30" data-end="13:00" style="border-style: none"></li>
-                    <li class="single-event" id='Click8' data-start="13:00" data-end="13:30" style="border-style: none"></li>
-                    <li class="single-event" id='Click9' data-start="13:30" data-end="14:00" style="border-style: none"></li>
-                    <li class="single-event" id='Click10' data-start="14:00" data-end="14:30" style="border-style: none"></li>
-                    <li class="single-event" id='Click11' data-start="14:30" data-end="15:00" style="border-style: none"></li>
-                    <li class="single-event" id='Click12' data-start="15:00" data-end="15:30" style="border-style: none"></li>
-                    <li class="single-event" id='Click13' data-start="15:30" data-end="16:00" style="border-style: none"></li>
-                    <li class="single-event" id='Click14' data-start="16:00" data-end="16:30" style="border-style: none"></li>
-                    <li class="single-event" id='Click15' data-start="16:30" data-end="17:00" style="border-style: none"></li>
-                    <li class="single-event" id='Click16' data-start="17:00" data-end="17:30" style="border-style: none"></li>
-                    <li class="single-event" id='Click17' data-start="17:30" data-end="18:00" style="border-style: none"></li>
+                        {% endfor%}
+                        <li class="single-event" id='Lunes09000930' data-start="09:00" data-end="09:30" style="border-style: none"></li>
+                        <li class="single-event" id="Lunes09301000" data-start="09:30" data-end="10:00" style="border-style: none"></li>
+                        <li class="single-event" id='Lunes10001030' data-start="10:00" data-end="10:30" style="border-style: none"></li>
+                        <li class="single-event" id='Lunes10301100' data-start="10:30" data-end="11:00" style="border-style: none"></li>
+                        <li class="single-event" id='Lunes11001130' data-start="11:00" data-end="11:30" style="border-style: none"></li>
+                        <li class="single-event" id='Lunes11301200' data-start="11:30" data-end="12:00" style="border-style: none"></li>
+                        <li class="single-event" id='Lunes12001230' data-start="12:00" data-end="12:30" style="border-style: none"></li>
+                        <li class="single-event" id='Lunes12301300' data-start="12:30" data-end="13:00" style="border-style: none"></li>
+                        <li class="single-event" id='Lunes13001330' data-start="13:00" data-end="13:30" style="border-style: none"></li>
+                        <li class="single-event" id='Lunes13301400' data-start="13:30" data-end="14:00" style="border-style: none"></li>
+                        <li class="single-event" id='Lunes14001430' data-start="14:00" data-end="14:30" style="border-style: none"></li>
+                        <li class="single-event" id='Lunes14301500' data-start="14:30" data-end="15:00" style="border-style: none"></li>
+                        <li class="single-event" id='Lunes15001530' data-start="15:00" data-end="15:30" style="border-style: none"></li>
+                        <li class="single-event" id='Lunes15301600' data-start="15:30" data-end="16:00" style="border-style: none"></li>
+                        <li class="single-event" id='Lunes16001630' data-start="16:00" data-end="16:30" style="border-style: none"></li>
+                        <li class="single-event" id='Lunes16301700' data-start="16:30" data-end="17:00" style="border-style: none"></li>
+                        <li class="single-event" id='Lunes17001730' data-start="17:00" data-end="17:30" style="border-style: none"></li>
+                        <li class="single-event" id='Lunes17301800' data-start="17:30" data-end="18:00" style="border-style: none"></li>
 
-				</ul>
-			</li>
+                    </ul>
+                </li>
 
-			<li class="events-group">
-				<div class="top-info"><span>Martes</span></div>
+                <li class="events-group">
+                    <div class="top-info"><span>Martes</span></div>
 
-				<ul id="Martes">
+                    <ul id="Martes">
 
-					{% for r in reservations.1 %}
+                        {% for r in reservations.1 %}
 
-					<li class="single-event" data-start="{{r.1}}" data-end="{{r.2}}" bgcolor="{{r.3}}">
-						<a href="">
-							<em class="event-name">{{r.0}}</em>
-						</a>
-					</li>
+                        <li class="single-event" data-start="{{r.1}}" data-end="{{r.2}}" bgcolor="{{r.3}}">
+                            <a href="">
+                                <em class="event-name">{{r.0}}</em>
+                            </a>
+                        </li>
 
-					{% endfor%}
-                    <li class="single-event" id='Click0-2' data-start="09:00" data-end="09:30" style="border-style: none"></li>
-                    <li class="single-event" id='Click1-2' data-start="09:30" data-end="10:00" style="border-style: none"></li>
-                    <li class="single-event" id='Click2-2' data-start="10:00" data-end="10:30" style="border-style: none"></li>
-                    <li class="single-event" id='Click3-2' data-start="10:30" data-end="11:00" style="border-style: none"></li>
-                    <li class="single-event" id='Click4-2' data-start="11:00" data-end="11:30" style="border-style: none"></li>
-                    <li class="single-event" id='Click5-2' data-start="11:30" data-end="12:00" style="border-style: none"></li>
-                    <li class="single-event" id='Click6-2' data-start="12:00" data-end="12:30" style="border-style: none"></li>
-                    <li class="single-event" id='Click7-2' data-start="12:30" data-end="13:00" style="border-style: none"></li>
-                    <li class="single-event" id='Click8-2' data-start="13:00" data-end="13:30" style="border-style: none"></li>
-                    <li class="single-event" id='Click9-2' data-start="13:30" data-end="14:00" style="border-style: none"></li>
-                    <li class="single-event" id='Click10-2' data-start="14:00" data-end="14:30" style="border-style: none"></li>
-                    <li class="single-event" id='Click11-2' data-start="14:30" data-end="15:00" style="border-style: none"></li>
-                    <li class="single-event" id='Click12-2' data-start="15:00" data-end="15:30" style="border-style: none"></li>
-                    <li class="single-event" id='Click13-2' data-start="15:30" data-end="16:00" style="border-style: none"></li>
-                    <li class="single-event" id='Click14-2' data-start="16:00" data-end="16:30" style="border-style: none"></li>
-                    <li class="single-event" id='Click15-2' data-start="16:30" data-end="17:00" style="border-style: none"></li>
-                    <li class="single-event" id='Click16-2' data-start="17:00" data-end="17:30" style="border-style: none"></li>
-                    <li class="single-event" id='Click17-2' data-start="17:30" data-end="18:00" style="border-style: none"></li>
-				</ul>
-			</li>
+                        {% endfor%}
+                        <li class="single-event" id='Martes09000930' data-start="09:00" data-end="09:30" style="border-style: none"></li>
+                        <li class="single-event" id='Martes09301000' data-start="09:30" data-end="10:00" style="border-style: none"></li>
+                        <li class="single-event" id='Martes10001030' data-start="10:00" data-end="10:30" style="border-style: none"></li>
+                        <li class="single-event" id='Martes10301100' data-start="10:30" data-end="11:00" style="border-style: none"></li>
+                        <li class="single-event" id='Martes11001130' data-start="11:00" data-end="11:30" style="border-style: none"></li>
+                        <li class="single-event" id='Martes11301200' data-start="11:30" data-end="12:00" style="border-style: none"></li>
+                        <li class="single-event" id='Martes12001230' data-start="12:00" data-end="12:30" style="border-style: none"></li>
+                        <li class="single-event" id='Martes12301300' data-start="12:30" data-end="13:00" style="border-style: none"></li>
+                        <li class="single-event" id='Martes13001330' data-start="13:00" data-end="13:30" style="border-style: none"></li>
+                        <li class="single-event" id='Martes13301400' data-start="13:30" data-end="14:00" style="border-style: none"></li>
+                        <li class="single-event" id='Martes14001430' data-start="14:00" data-end="14:30" style="border-style: none"></li>
+                        <li class="single-event" id='Martes14301500' data-start="14:30" data-end="15:00" style="border-style: none"></li>
+                        <li class="single-event" id='Martes15001530' data-start="15:00" data-end="15:30" style="border-style: none"></li>
+                        <li class="single-event" id='Martes15301600' data-start="15:30" data-end="16:00" style="border-style: none"></li>
+                        <li class="single-event" id='Martes16001630' data-start="16:00" data-end="16:30" style="border-style: none"></li>
+                        <li class="single-event" id='Martes16301700' data-start="16:30" data-end="17:00" style="border-style: none"></li>
+                        <li class="single-event" id='Martes17001730' data-start="17:00" data-end="17:30" style="border-style: none"></li>
+                        <li class="single-event" id='Martes17301800' data-start="17:30" data-end="18:00" style="border-style: none"></li>
+                    </ul>
+                </li>
 
-			<li class="events-group">
-				<div class="top-info"><span>Miércoles</span></div>
+                <li class="events-group">
+                    <div class="top-info"><span>Miércoles</span></div>
 
-				<ul id="Miercoles">
-					{% for r in reservations.2 %}
+                    <ul id="Miercoles">
+                        {% for r in reservations.2 %}
 
-					<li class="single-event" data-start="{{r.1}}" data-end="{{r.2}}" bgcolor="{{r.3}}" >
-						<a href="">
-							<em class="event-name">{{r.0}}</em>
-						</a>
-					</li>
+                        <li class="single-event" data-start="{{r.1}}" data-end="{{r.2}}" bgcolor="{{r.3}}" >
+                            <a href="">
+                                <em class="event-name">{{r.0}}</em>
+                            </a>
+                        </li>
 
-					{% endfor%}
+                        {% endfor%}
 
-                    <li class="single-event" id='Click0-3' data-start="09:00" data-end="09:30" style="border-style: none"></li>
-                    <li class="single-event" id='Click1-3' data-start="09:30" data-end="10:00" style="border-style: none"></li>
-                    <li class="single-event" id='Click2-3' data-start="10:00" data-end="10:30" style="border-style: none"></li>
-                    <li class="single-event" id='Click3-3' data-start="10:30" data-end="11:00" style="border-style: none"></li>
-                    <li class="single-event" id='Click4-3' data-start="11:00" data-end="11:30" style="border-style: none"></li>
-                    <li class="single-event" id='Click5-3' data-start="11:30" data-end="12:00" style="border-style: none"></li>
-                    <li class="single-event" id='Click6-3' data-start="12:00" data-end="12:30" style="border-style: none"></li>
-                    <li class="single-event" id='Click7-3' data-start="12:30" data-end="13:00" style="border-style: none"></li>
-                    <li class="single-event" id='Click8-3' data-start="13:00" data-end="13:30" style="border-style: none"></li>
-                    <li class="single-event" id='Click9-3' data-start="13:30" data-end="14:00" style="border-style: none"></li>
-                    <li class="single-event" id='Click10-3' data-start="14:00" data-end="14:30" style="border-style: none"></li>
-                    <li class="single-event" id='Click11-3' data-start="14:30" data-end="15:00" style="border-style: none"></li>
-                    <li class="single-event" id='Click12-3' data-start="15:00" data-end="15:30" style="border-style: none"></li>
-                    <li class="single-event" id='Click13-3' data-start="15:30" data-end="16:00" style="border-style: none"></li>
-                    <li class="single-event" id='Click14-3' data-start="16:00" data-end="16:30" style="border-style: none"></li>
-                    <li class="single-event" id='Click15-3' data-start="16:30" data-end="17:00" style="border-style: none"></li>
-                    <li class="single-event" id='Click16-3' data-start="17:00" data-end="17:30" style="border-style: none"></li>
-                    <li class="single-event" id='Click17-3' data-start="17:30" data-end="18:00" style="border-style: none"></li>
-				</ul>
-			</li>
+                        <li class="single-event" id='Miercoles09000930' data-start="09:00" data-end="09:30" style="border-style: none"></li>
+                        <li class="single-event" id='Miercoles09301000' data-start="09:30" data-end="10:00" style="border-style: none"></li>
+                        <li class="single-event" id='Miercoles10001030' data-start="10:00" data-end="10:30" style="border-style: none"></li>
+                        <li class="single-event" id='Miercoles10301100' data-start="10:30" data-end="11:00" style="border-style: none"></li>
+                        <li class="single-event" id='Miercoles11001130' data-start="11:00" data-end="11:30" style="border-style: none"></li>
+                        <li class="single-event" id='Miercoles11301200' data-start="11:30" data-end="12:00" style="border-style: none"></li>
+                        <li class="single-event" id='Miercoles12001230' data-start="12:00" data-end="12:30" style="border-style: none"></li>
+                        <li class="single-event" id='Miercoles12301300' data-start="12:30" data-end="13:00" style="border-style: none"></li>
+                        <li class="single-event" id='Miercoles13001330' data-start="13:00" data-end="13:30" style="border-style: none"></li>
+                        <li class="single-event" id='Miercoles13301400' data-start="13:30" data-end="14:00" style="border-style: none"></li>
+                        <li class="single-event" id='Miercoles14001430' data-start="14:00" data-end="14:30" style="border-style: none"></li>
+                        <li class="single-event" id='Miercoles14301500' data-start="14:30" data-end="15:00" style="border-style: none"></li>
+                        <li class="single-event" id='Miercoles15001530' data-start="15:00" data-end="15:30" style="border-style: none"></li>
+                        <li class="single-event" id='Miercoles15301600' data-start="15:30" data-end="16:00" style="border-style: none"></li>
+                        <li class="single-event" id='Miercoles16001630' data-start="16:00" data-end="16:30" style="border-style: none"></li>
+                        <li class="single-event" id='Miercoles16301700' data-start="16:30" data-end="17:00" style="border-style: none"></li>
+                        <li class="single-event" id='Miercoles17001730' data-start="17:00" data-end="17:30" style="border-style: none"></li>
+                        <li class="single-event" id='Miercoles17301800' data-start="17:30" data-end="18:00" style="border-style: none"></li>
+                    </ul>
+                </li>
 
-			<li class="events-group">
-				<div class="top-info"><span>Jueves</span></div>
+                <li class="events-group">
+                    <div class="top-info"><span>Jueves</span></div>
 
-				<ul id="Jueves">
-					{% for r in reservations.3 %}
+                    <ul id="Jueves">
+                        {% for r in reservations.3 %}
 
-					<li class="single-event" data-start="{{r.1}}" data-end="{{r.2}}"  bgcolor="{{r.3}}">
-						<a href="">
-							<em class="event-name">{{r.0}}</em>
-						</a>
-					</li>
+                        <li class="single-event" data-start="{{r.1}}" data-end="{{r.2}}"  bgcolor="{{r.3}}">
+                            <a href="">
+                                <em class="event-name">{{r.0}}</em>
+                            </a>
+                        </li>
 
-					{% endfor%}
+                        {% endfor%}
 
-                    <li class="single-event" id='Click0-4' data-start="09:00" data-end="09:30" style="border-style: none"></li>
-                    <li class="single-event" id='Click1-4' data-start="09:30" data-end="10:00" style="border-style: none"></li>
-                    <li class="single-event" id='Click2-4' data-start="10:00" data-end="10:30" style="border-style: none"></li>
-                    <li class="single-event" id='Click3-4' data-start="10:30" data-end="11:00" style="border-style: none"></li>
-                    <li class="single-event" id='Click4-4' data-start="11:00" data-end="11:30" style="border-style: none"></li>
-                    <li class="single-event" id='Click5-4' data-start="11:30" data-end="12:00" style="border-style: none"></li>
-                    <li class="single-event" id='Click6-4' data-start="12:00" data-end="12:30" style="border-style: none"></li>
-                    <li class="single-event" id='Click7-4' data-start="12:30" data-end="13:00" style="border-style: none"></li>
-                    <li class="single-event" id='Click8-4' data-start="13:00" data-end="13:30" style="border-style: none"></li>
-                    <li class="single-event" id='Click9-4' data-start="13:30" data-end="14:00" style="border-style: none"></li>
-                    <li class="single-event" id='Click10-4' data-start="14:00" data-end="14:30" style="border-style: none"></li>
-                    <li class="single-event" id='Click11-4' data-start="14:30" data-end="15:00" style="border-style: none"></li>
-                    <li class="single-event" id='Click12-4' data-start="15:00" data-end="15:30" style="border-style: none"></li>
-                    <li class="single-event" id='Click13-4' data-start="15:30" data-end="16:00" style="border-style: none"></li>
-                    <li class="single-event" id='Click14-4' data-start="16:00" data-end="16:30" style="border-style: none"></li>
-                    <li class="single-event" id='Click15-4' data-start="16:30" data-end="17:00" style="border-style: none"></li>
-                    <li class="single-event" id='Click16-4' data-start="17:00" data-end="17:30" style="border-style: none"></li>
-                    <li class="single-event" id='Click17-4' data-start="17:30" data-end="18:00" style="border-style: none"></li>
-				</ul>
-			</li>
+                        <li class="single-event" id='Jueves09000930' data-start="09:00" data-end="09:30" style="border-style: none"></li>
+                        <li class="single-event" id='Jueves09301000' data-start="09:30" data-end="10:00" style="border-style: none"></li>
+                        <li class="single-event" id='Jueves10001030' data-start="10:00" data-end="10:30" style="border-style: none"></li>
+                        <li class="single-event" id='Jueves10301100' data-start="10:30" data-end="11:00" style="border-style: none"></li>
+                        <li class="single-event" id='Jueves11001130' data-start="11:00" data-end="11:30" style="border-style: none"></li>
+                        <li class="single-event" id='Jueves11301200' data-start="11:30" data-end="12:00" style="border-style: none"></li>
+                        <li class="single-event" id='Jueves12001230' data-start="12:00" data-end="12:30" style="border-style: none"></li>
+                        <li class="single-event" id='Jueves12301300' data-start="12:30" data-end="13:00" style="border-style: none"></li>
+                        <li class="single-event" id='Jueves13001330' data-start="13:00" data-end="13:30" style="border-style: none"></li>
+                        <li class="single-event" id='Jueves13301400' data-start="13:30" data-end="14:00" style="border-style: none"></li>
+                        <li class="single-event" id='Jueves14001430' data-start="14:00" data-end="14:30" style="border-style: none"></li>
+                        <li class="single-event" id='Jueves14301500' data-start="14:30" data-end="15:00" style="border-style: none"></li>
+                        <li class="single-event" id='Jueves15001530' data-start="15:00" data-end="15:30" style="border-style: none"></li>
+                        <li class="single-event" id='Jueves15301600' data-start="15:30" data-end="16:00" style="border-style: none"></li>
+                        <li class="single-event" id='Jueves16001630' data-start="16:00" data-end="16:30" style="border-style: none"></li>
+                        <li class="single-event" id='Jueves16301700' data-start="16:30" data-end="17:00" style="border-style: none"></li>
+                        <li class="single-event" id='Jueves17001730' data-start="17:00" data-end="17:30" style="border-style: none"></li>
+                        <li class="single-event" id='Jueves17301800' data-start="17:30" data-end="18:00" style="border-style: none"></li>
+                    </ul>
+                </li>
 
-			<li class="events-group">
-				<div class="top-info"><span>Viernes</span></div>
+                <li class="events-group">
+                    <div class="top-info"><span>Viernes</span></div>
 
-				<ul id="Viernes">
-					{% for r in reservations.4 %}
+                    <ul id="Viernes">
+                        {% for r in reservations.4 %}
 
-					<li class="single-event" data-start="{{r.1}}" data-end="{{r.2}}" bgcolor="{{r.3}}">
-						<a href="">
-							<em class="event-name">{{r.0}}</em>
-						</a>
-					</li>
+                        <li class="single-event" data-start="{{r.1}}" data-end="{{r.2}}" bgcolor="{{r.3}}">
+                            <a href="">
+                                <em class="event-name">{{r.0}}</em>
+                            </a>
+                        </li>
 
-					{% endfor%}
+                        {% endfor%}
 
-                    <li class="single-event" id='Click0-5' data-start="09:00" data-end="09:30" style="border-style: none"></li>
-                    <li class="single-event" id='Click1-5' data-start="09:30" data-end="10:00" style="border-style: none"></li>
-                    <li class="single-event" id='Click2-5' data-start="10:00" data-end="10:30" style="border-style: none"></li>
-                    <li class="single-event" id='Click3-5' data-start="10:30" data-end="11:00" style="border-style: none"></li>
-                    <li class="single-event" id='Click4-5' data-start="11:00" data-end="11:30" style="border-style: none"></li>
-                    <li class="single-event" id='Click5-5' data-start="11:30" data-end="12:00" style="border-style: none"></li>
-                    <li class="single-event" id='Click6-5' data-start="12:00" data-end="12:30" style="border-style: none"></li>
-                    <li class="single-event" id='Click7-5' data-start="12:30" data-end="13:00" style="border-style: none"></li>
-                    <li class="single-event" id='Click8-5' data-start="13:00" data-end="13:30" style="border-style: none"></li>
-                    <li class="single-event" id='Click9-5' data-start="13:30" data-end="14:00" style="border-style: none"></li>
-                    <li class="single-event" id='Click10-5' data-start="14:00" data-end="14:30" style="border-style: none"></li>
-                    <li class="single-event" id='Click11-5' data-start="14:30" data-end="15:00" style="border-style: none"></li>
-                    <li class="single-event" id='Click12-5' data-start="15:00" data-end="15:30" style="border-style: none"></li>
-                    <li class="single-event" id='Click13-5' data-start="15:30" data-end="16:00" style="border-style: none"></li>
-                    <li class="single-event" id='Click14-5' data-start="16:00" data-end="16:30" style="border-style: none"></li>
-                    <li class="single-event" id='Click15-5' data-start="16:30" data-end="17:00" style="border-style: none"></li>
-                    <li class="single-event" id='Click16-5' data-start="17:00" data-end="17:30" style="border-style: none"></li>
-                    <li class="single-event" id='Click17-5' data-start="17:30" data-end="18:00" style="border-style: none"></li>
-				</ul>
-			</li>
-		</ul>
-
+                        <li class="single-event" id='Viernes09000930' data-start="09:00" data-end="09:30" style="border-style: none"></li>
+                        <li class="single-event" id='Viernes09301000' data-start="09:30" data-end="10:00" style="border-style: none"></li>
+                        <li class="single-event" id='Viernes10001030' data-start="10:00" data-end="10:30" style="border-style: none"></li>
+                        <li class="single-event" id='Viernes10301100' data-start="10:30" data-end="11:00" style="border-style: none"></li>
+                        <li class="single-event" id='Viernes11001130' data-start="11:00" data-end="11:30" style="border-style: none"></li>
+                        <li class="single-event" id='Viernes11301200' data-start="11:30" data-end="12:00" style="border-style: none"></li>
+                        <li class="single-event" id='Viernes12001230' data-start="12:00" data-end="12:30" style="border-style: none"></li>
+                        <li class="single-event" id='Viernes12301300' data-start="12:30" data-end="13:00" style="border-style: none"></li>
+                        <li class="single-event" id='Viernes13001330' data-start="13:00" data-end="13:30" style="border-style: none"></li>
+                        <li class="single-event" id='Viernes13301400' data-start="13:30" data-end="14:00" style="border-style: none"></li>
+                        <li class="single-event" id='Viernes14001430' data-start="14:00" data-end="14:30" style="border-style: none"></li>
+                        <li class="single-event" id='Viernes14301500' data-start="14:30" data-end="15:00" style="border-style: none"></li>
+                        <li class="single-event" id='Viernes15001530' data-start="15:00" data-end="15:30" style="border-style: none"></li>
+                        <li class="single-event" id='Viernes15301600' data-start="15:30" data-end="16:00" style="border-style: none"></li>
+                        <li class="single-event" id='Viernes16001630' data-start="16:00" data-end="16:30" style="border-style: none"></li>
+                        <li class="single-event" id='Viernes16301700' data-start="16:30" data-end="17:00" style="border-style: none"></li>
+                        <li class="single-event" id='Viernes17001730' data-start="17:00" data-end="17:30" style="border-style: none"></li>
+                        <li class="single-event" id='Viernes17301800' data-start="17:30" data-end="18:00" style="border-style: none"></li>
+                    </ul>
+                </li>
+            </ul>
+        </form>
 	</div>
 
 
@@ -243,3 +244,4 @@
 
 	<div class="cover-layer"></div>
 </div> <!-- .cd-schedule -->
+<!-- Modificar boton para que filtre reservas por horario seleccionado usar ID para obtener hora de inicio y fin -->
