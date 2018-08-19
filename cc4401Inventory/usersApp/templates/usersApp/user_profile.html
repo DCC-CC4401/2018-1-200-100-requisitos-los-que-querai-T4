@@ -124,7 +124,7 @@
 
                                                 <div class="d-flex w-100 justify-content-between">
                                                     <h2 class="mb-1">
-                                                        {{ reservation.space.name }}
+                                                        <a href="{% url 'reservation_data' reservation.id %}"> {{ reservation.space.name }}</a>
                                                     </h2>
                                                     <medium>
                                                         <strong>
@@ -246,9 +246,7 @@
                                                  aria-labelledby="v-pills-{{ loan.pk }}-tab">
 
                                                 <div class="d-flex w-100 justify-content-between">
-                                                    <h2 class="mb-1">
-                                                        {{ loan.article.name }}
-                                                    </h2>
+                                                    <a href="{% url 'loan_data' loan.id %}"><h2 class="mb-1">{{ loan.article.name }}</h2></a>
                                                     <medium>
                                                         <strong>
                                                             {{ loan.starting_date_time }}
