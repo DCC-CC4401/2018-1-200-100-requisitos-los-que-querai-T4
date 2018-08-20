@@ -182,6 +182,8 @@ def formatFecha(dt):
 
 def reservaEspacio(request):
     if request.method == "POST":
+        getfecha = request.POST["hiddenini"]
+        return HttpResponse(getfecha)
         initial_t = request.POST['t_inicio']
         final_t = request.POST['t_final']
         datetime_object2 = datetime.datetime.strptime(initial_t, '%Y-%m-%dT%H:%M')

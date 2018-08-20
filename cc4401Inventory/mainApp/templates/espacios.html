@@ -38,11 +38,14 @@
 
     <form action="{% url 'reservaEspacio' %}" align="middle" method="post">
         {% csrf_token %}
-        <input type="datetime-local" name="t_inicio" id="t_inicio" required="true">
-        <input type="datetime-local" name="t_final" id="t_final" required="true">
+        <input type="hidden" name="hiddenini" id="hiddenini">
+        <input type="hidden" name="hiddenfin" id="hiddenfin">
+        <input type="hidden" name="hiddendia" id="hiddendia">
+        <input type="datetime-local" name="t_inicio" id="t_inicio" >
+        <input type="datetime-local" name="t_final" id="t_final">
         <button type="submit" id="resButton" class="btn btn-info btn-lg" >Reservar</button>
     </form>
-
+    <button type="button" id="parse">Reservar Touch</button>
     <!--Boton que ejecuta el modal correspondiente -->
     <button type="button" id="boton" class="btn" data-toggle="modal" data-target={{modal}}></button>
 
@@ -129,13 +132,17 @@
         var hora_ini =[];
         var hora_fin =[];
         var dias = []
-        $('#resButton').click(function(){
+        $('#parse').click(function(){
             var i;
             for(i = 0; i < array.length; i++){
                 hora_ini.push(array[i].attr('data-start'));
                 hora_fin.push(array[i].attr('data-end'));
                 dias.push(array[i].attr('id').substr(0, array[i].attr('id').length) - 8);
             }
+            alert(hora_ini[0]);
+            document.getElementById("hiddenini").value = hora_ini[0];
+            document.getElementById("hiddenfin").value = hora_fin[hora_fin.length -1];
+            document.getElementById("hiddendia").value = dias[0];
         });
     </script>
     <script>
