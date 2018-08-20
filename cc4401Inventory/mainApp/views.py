@@ -32,10 +32,13 @@ def landing_spaces(request, date=None):
             current_week = datetime.date.today().isocalendar()[1]
             current_date = datetime.date.today().strftime("%Y-%m-%d")
 
-    reservations = Reservation.objects.filter(starting_date_time__week = current_week, state__in = ['P','A'])
-    colores = {'A': 'rgba(0,153,0,0.7)',
-               'P': 'rgba(51,51,204,0.7)'}
+    #reservations = Reservation.objects.filter(starting_date_time__week = current_week, state__in = ['P','A'])
+    #colores = {'A': 'rgba(0,153,0,0.7)',
+    #           'P': 'rgba(51,51,204,0.7)'}
 
+    reservations = Reservation.objects.filter(starting_date_time__week=current_week, state__in=['A', 'V'])
+    colores = {'A': 'rgba(0,153,0,0.7)',
+               'V': 'rgba(153, 0, 204,0.7)'}
     res_list = []
     for i in range(5):
         res_list.append(list())
@@ -94,9 +97,9 @@ def landing_spaces_modal(request, modalActivado, spaces, ini_t, fin_t, date=None
             current_week = datetime.date.today().isocalendar()[1]
             current_date = datetime.date.today().strftime("%Y-%m-%d")
 
-    reservations = Reservation.objects.filter(starting_date_time__week = current_week, state__in = ['P','A'])
+    reservations = Reservation.objects.filter(starting_date_time__week=current_week, state__in=['A', 'V'])
     colores = {'A': 'rgba(0,153,0,0.7)',
-               'P': 'rgba(51,51,204,0.7)'}
+               'V': 'rgba(153, 0, 204,0.7)'}
 
     res_list = []
     for i in range(5):
@@ -182,17 +185,49 @@ def formatFecha(dt):
 
 def reservaEspacio(request):
     if request.method == "POST":
-        getfecha = request.POST["hiddenini"]
-        return HttpResponse(getfecha)
+        semana = request.POST["semana"]
+
+        initial_t = request.POST["hiddenini"]
+        datetime_inicial = semana + "T" + initial_t
+        datetime_object2 = datetime.datetime.strptime(datetime_inicial, '%Y-%m-%dT%H:%M')
+
+        final_t = request.POST["hiddenfin"]
+        datetime_final = semana + "T" + final_t
+        final_datetime = datetime.datetime.strptime(datetime_final, '%Y-%m-%dT%H:%M')
+
+        day = request.POST["hiddendia"]
+
+        if day == "Martes":
+            datetime_object2 = datetime_object2 + datetime.timedelta(days=1)
+            final_datetime = final_datetime + datetime.timedelta(days=1)
+        elif day == "Miercoles":
+            datetime_object2 = datetime_object2 + datetime.timedelta(days=2)
+            final_datetime = final_datetime + datetime.timedelta(days=2)
+        elif day == "Jueves":
+            datetime_object2 = datetime_object2 + datetime.timedelta(days=3)
+            final_datetime = final_datetime + datetime.timedelta(days=3)
+        elif day == "Viernes":
+            datetime_object2 = datetime_object2 + datetime.timedelta(days=4)
+            final_datetime = final_datetime + datetime.timedelta(days=4)
+
+        """return HttpResponse(datetime_object2)
+        initial_t = request.POST["hiddenini"]
+        final_t = request.POST["hiddenfin"]
+        day = request.POST["hiddendia"]
+        if day=="Lunes":
+            fecha = day + initial_t + final_t
+        return HttpResponse(fecha)
         initial_t = request.POST['t_inicio']
         final_t = request.POST['t_final']
         datetime_object2 = datetime.datetime.strptime(initial_t, '%Y-%m-%dT%H:%M')
+        """
         datetime_object3 = datetime_object2-datetime.timedelta(hours=1)
         datetime_object4 = datetime_object2-datetime.timedelta(hours=24)
 
-        initial_datetime = datetime_object2 +  datetime.timedelta(hours=3)
-        final_datetime = datetime.datetime.strptime(final_t, '%Y-%m-%dT%H:%M')
-        final_datetime = final_datetime + datetime.timedelta(hours=3)
+        #initial_datetime = datetime_object2 +  datetime.timedelta(hours=3)
+        #final_datetime = datetime.datetime.strptime(final_datetime, '%Y-%m-%dT%H:%M')
+        #final_datetime = final_datetime + datetime.timedelta(hours=3)
+
         if(datetime_object3 < datetime.datetime.now()):
             listaEspacios = []
             return landing_spaces_modal(request, "#myModal1",listaEspacios, 0, 0)
@@ -211,7 +246,7 @@ def reservaEspacio(request):
 
             #spaces = Space.objects.exclude(name = "Quincho")
             return landing_spaces_modal(request, "#myModal2", listaEspacios, formatFecha(initial_datetime), formatFecha(final_datetime))
-        if (datetime_object4 < datetime.datetime.now()):
+        else:
             listaEspacios = Space.objects.all()
 
             reservas = (Reservation.objects.filter(starting_date_time__range=[initial_datetime, final_datetime]) | \
@@ -226,7 +261,6 @@ def reservaEspacio(request):
 
             #spaces = Space.objects.exclude(name = "Quincho")
             return landing_spaces_modal(request, "#myModal2", listaEspacios, formatFecha(initial_datetime), formatFecha(final_datetime))
-        return HttpResponse("si se puede")
     else:
         return redirect("/")
 
