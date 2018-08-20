@@ -36,6 +36,7 @@ def reservation_data(request, reservation_id):
         print(e)
         return redirect('/')
 
+@login_required
 def cancel_reservation(request, reservation_id):
     if request.method == 'POST':
         reservation = Reservation.objects.get(id=reservation_id)
