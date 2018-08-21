@@ -11,6 +11,13 @@
 	<div class="col-md-10">
     <div class="row">
 
+        <div class="col-6 offset-3 schedule-current-week" style="text-align: center;">
+          <div class="alert alert-info">
+            <p>Estás viendo la semana del lunes <b>{{ actual_monday }}</b></p>
+          </div>
+        </div>
+
+
         {% include '_schedule_landing.html' %}
 
     </div>
@@ -132,5 +139,680 @@
     $(function () {
         $('[data-toggle="tooltip"]').tooltip()
     })
+    </script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.0-alpha14/js/tempusdominus-bootstrap-4.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.0-alpha14/css/tempusdominus-bootstrap-4.min.css" />
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.0-alpha14/js/tempusdominus-bootstrap-4.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.0-alpha14/css/tempusdominus-bootstrap-4.min.css" />
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.1/js/tempusdominus-bootstrap-4.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.1/css/tempusdominus-bootstrap-4.min.css" />
+    <script type="text/javascript">
+        if({{modalState}}){
+            document.getElementById("boton").click();
+        }
+    </script>
+    {% load static %}
+    <script src="{% static 'js/modernizr.js' %}"></script>
+    <script src="{% static 'js/jquery-3.0.0.min.js' %}"></script>
+    <script src="{% static 'js/main.js' %}"></script> <!-- Resource jQuery -->
+    <script>
+        var array = [];
+    </script>
+    <script>
+        var hora_ini =[];
+        var hora_fin =[];
+        var dias = []
+        $('#parse').click(function(){
+            var i;
+            for(i = 0; i < array.length; i++){
+                hora_ini.push(array[i].attr('data-start'));
+                hora_fin.push(array[i].attr('data-end'));
+                dias.push(array[i].attr('id').substr(0, array[i].attr('id').length) - 8);
+            }
+            alert(hora_ini[0]);
+            document.getElementById("hiddenini").value = hora_ini[0];
+            document.getElementById("hiddenfin").value = hora_fin[hora_fin.length -1];
+            document.getElementById("hiddendia").value = dias[0];
+            //$('form').submit()
+        });
+    </script>
+    <script>
+        $('#Lunes09000930').click(function () {
+
+            $(this).toggleClass('clicked');
+            array.push($(this));
+        });
+    </script>
+    <script>
+        $('#Lunes09301000').click(function () {
+
+            $(this).toggleClass('clicked');
+            array.push($(this));
+        });
+    </script>
+    <script>
+        $('#Lunes10001030').click(function () {
+
+            $(this).toggleClass('clicked');
+            array.push($(this));
+        });
+    </script>
+    <script>
+        $('#Lunes10301100').click(function () {
+
+            $(this).toggleClass('clicked');
+            array.push($(this));
+        });
+    </script>
+    <script>
+        $('#Lunes11001130').click(function () {
+
+            $(this).toggleClass('clicked');
+            array.push($(this));
+        });
+    </script>
+    <script>
+        $('#Lunes11301200').click(function () {
+
+            $(this).toggleClass('clicked');
+            array.push($(this));
+        });
+    </script>
+    <script>
+        $('#Lunes12001230').click(function () {
+
+            $(this).toggleClass('clicked');
+            array.push($(this));
+        });
+    </script>
+    <script>
+        $('#Lunes12301300').click(function () {
+
+            $(this).toggleClass('clicked');
+            array.push($(this));
+        });
+    </script>
+    <script>
+        $('#Lunes13001330').click(function () {
+
+            $(this).toggleClass('clicked');
+            array.push($(this));
+        });
+    </script>
+    <script>
+        $('#Lunes13301400').click(function () {
+
+            $(this).toggleClass('clicked');
+            array.push($(this));
+        });
+    </script>
+    <script>
+        $('#Lunes14001430').click(function () {
+
+            $(this).toggleClass('clicked');
+            array.push($(this));
+        });
+    </script>
+    <script>
+        $('#Lunes14301500').click(function () {
+
+            $(this).toggleClass('clicked');
+            array.push($(this));
+        });
+    </script>
+    <script>
+        $('#Lunes15001530').click(function () {
+
+            $(this).toggleClass('clicked');
+            array.push($(this));
+        });
+    </script>
+    <script>
+        $('#Lunes15301600').click(function () {
+
+            $(this).toggleClass('clicked');
+            array.push($(this));
+        });
+    </script>
+    <script>
+        $('#Lunes16001630').click(function () {
+
+            $(this).toggleClass('clicked');
+            array.push($(this));
+        });
+    </script>
+    <script>
+        $('#Lunes16301700').click(function () {
+
+            $(this).toggleClass('clicked');
+            array.push($(this));
+        });
+    </script>
+    <script>
+        $('#Lunes17001730').click(function () {
+
+            $(this).toggleClass('clicked');
+            array.push($(this));
+        });
+    </script>
+    <script>
+        $('#Lunes17301800').click(function () {
+
+            $(this).toggleClass('clicked');
+            array.push($(this));
+        });
+    </script>
+
+    <!-- Martes -->
+    <script>
+        $('#Martes09000930').click(function () {
+
+            $(this).toggleClass('clicked');
+            array.push($(this));
+        });
+    </script>
+    <script>
+        $('#Martes09301000').click(function () {
+
+            $(this).toggleClass('clicked');
+            array.push($(this));
+        });
+    </script>
+    <script>
+        $('#Martes10001030').click(function () {
+
+            $(this).toggleClass('clicked');
+            array.push($(this));
+        });
+    </script>
+    <script>
+        $('#Martes10301100').click(function () {
+
+            $(this).toggleClass('clicked');
+            array.push($(this));
+        });
+    </script>
+    <script>
+        $('#Martes11001130').click(function () {
+
+            $(this).toggleClass('clicked');
+            array.push($(this));
+        });
+    </script>
+    <script>
+        $('#Martes11301200').click(function () {
+
+            $(this).toggleClass('clicked');
+            array.push($(this));
+        });
+    </script>
+    <script>
+        $('#Martes12001230').click(function () {
+
+            $(this).toggleClass('clicked');
+            array.push($(this));
+        });
+    </script>
+    <script>
+        $('#Martes12301300').click(function () {
+
+            $(this).toggleClass('clicked');
+            array.push($(this));
+        });
+    </script>
+    <script>
+        $('#Martes13001330').click(function () {
+
+            $(this).toggleClass('clicked');
+            array.push($(this));
+        });
+    </script>
+    <script>
+        $('#Martes13301400').click(function () {
+
+            $(this).toggleClass('clicked');
+            array.push($(this));
+        });
+    </script>
+    <script>
+        $('#Martes14001430').click(function () {
+
+            $(this).toggleClass('clicked');
+            array.push($(this));
+        });
+    </script>
+    <script>
+        $('#Martes14301500').click(function () {
+
+            $(this).toggleClass('clicked');
+            array.push($(this));
+        });
+    </script>
+    <script>
+        $('#Martes15001530').click(function () {
+
+            $(this).toggleClass('clicked');
+            array.push($(this));
+        });
+    </script>
+    <script>
+        $('#Martes15301600').click(function () {
+
+            $(this).toggleClass('clicked');
+            array.push($(this));
+        });
+    </script>
+    <script>
+        $('#Martes16001630').click(function () {
+
+            $(this).toggleClass('clicked');
+            array.push($(this));
+        });
+    </script>
+    <script>
+        $('#Martes16301700').click(function () {
+
+            $(this).toggleClass('clicked');
+            array.push($(this));
+        });
+    </script>
+    <script>
+        $('#Martes17001730').click(function () {
+
+            $(this).toggleClass('clicked');
+            array.push($(this));
+        });
+    </script>
+    <script>
+        $('#Martes17301800').click(function () {
+
+            $(this).toggleClass('clicked');
+            array.push($(this));
+        });
+    </script>
+
+    <!-- Miercoles -->
+    <script>
+        $('#Miercoles09000930').click(function () {
+
+            $(this).toggleClass('clicked');
+            array.push($(this));
+        });
+    </script>
+    <script>
+        $('#Miercoles09301000').click(function () {
+
+            $(this).toggleClass('clicked');
+            array.push($(this));
+        });
+    </script>
+    <script>
+        $('#Miercoles10001030').click(function () {
+
+            $(this).toggleClass('clicked');
+            array.push($(this));
+        });
+    </script>
+    <script>
+        $('#Miercoles10301100').click(function () {
+
+            $(this).toggleClass('clicked');
+            array.push($(this));
+        });
+    </script>
+    <script>
+        $('#Miercoles11001130').click(function () {
+
+            $(this).toggleClass('clicked');
+            array.push($(this));
+        });
+    </script>
+    <script>
+        $('#Miercoles11301200').click(function () {
+
+            $(this).toggleClass('clicked');
+            array.push($(this));
+        });
+    </script>
+    <script>
+        $('#Miercoles12001230').click(function () {
+
+            $(this).toggleClass('clicked');
+            array.push($(this));
+        });
+    </script>
+    <script>
+        $('#Miercoles12301300').click(function () {
+
+            $(this).toggleClass('clicked');
+            array.push($(this));
+        });
+    </script>
+    <script>
+        $('#Miercoles13001330').click(function () {
+
+            $(this).toggleClass('clicked');
+            array.push($(this));
+        });
+    </script>
+    <script>
+        $('#Miercoles13301400').click(function () {
+
+            $(this).toggleClass('clicked');
+            array.push($(this));
+        });
+    </script>
+    <script>
+        $('#Miercoles14001430').click(function () {
+
+            $(this).toggleClass('clicked');
+            array.push($(this));
+        });
+    </script>
+    <script>
+        $('#Miercoles14301500').click(function () {
+
+            $(this).toggleClass('clicked');
+            array.push($(this));
+        });
+    </script>
+    <script>
+        $('#Miercoles15001530').click(function () {
+
+            $(this).toggleClass('clicked');
+            array.push($(this));
+        });
+    </script>
+    <script>
+        $('#Miercoles15301600').click(function () {
+
+            $(this).toggleClass('clicked');
+            array.push($(this));
+        });
+    </script>
+    <script>
+        $('#Miercoles16001630').click(function () {
+
+            $(this).toggleClass('clicked');
+            array.push($(this));
+        });
+    </script>
+    <script>
+        $('#Miercoles16301700').click(function () {
+
+            $(this).toggleClass('clicked');
+            array.push($(this));
+        });
+    </script>
+    <script>
+        $('#Miercoles17001730').click(function () {
+
+            $(this).toggleClass('clicked');
+            array.push($(this));
+        });
+    </script>
+    <script>
+        $('#Miercoles17301800').click(function () {
+
+            $(this).toggleClass('clicked');
+            array.push($(this));
+        });
+    </script>
+
+    <!-- Jueves -->
+    <script>
+        $('#Jueves09000930').click(function () {
+
+            $(this).toggleClass('clicked');
+            array.push($(this));
+        });
+    </script>
+    <script>
+        $('#Jueves09301000').click(function () {
+
+            $(this).toggleClass('clicked');
+            array.push($(this));
+        });
+    </script>
+    <script>
+        $('#Jueves10001030').click(function () {
+
+            $(this).toggleClass('clicked');
+            array.push($(this));
+        });
+    </script>
+    <script>
+        $('#Jueves10301100').click(function () {
+
+            $(this).toggleClass('clicked');
+            array.push($(this));
+        });
+    </script>
+    <script>
+        $('#Jueves11001130').click(function () {
+
+            $(this).toggleClass('clicked');
+            array.push($(this));
+        });
+    </script>
+    <script>
+        $('#Jueves11301200').click(function () {
+
+            $(this).toggleClass('clicked');
+            array.push($(this));
+        });
+    </script>
+    <script>
+        $('#Jueves12001230').click(function () {
+
+            $(this).toggleClass('clicked');
+            array.push($(this));
+        });
+    </script>
+    <script>
+        $('#Jueves12301300').click(function () {
+
+            $(this).toggleClass('clicked');
+            array.push($(this));
+        });
+    </script>
+    <script>
+        $('#Jueves13001330').click(function () {
+
+            $(this).toggleClass('clicked');
+            array.push($(this));
+        });
+    </script>
+    <script>
+        $('#Jueves13301400').click(function () {
+
+            $(this).toggleClass('clicked');
+            array.push($(this));
+        });
+    </script>
+    <script>
+        $('#Jueves14001430').click(function () {
+
+            $(this).toggleClass('clicked');
+            array.push($(this));
+        });
+    </script>
+    <script>
+        $('#Jueves14301500').click(function () {
+
+            $(this).toggleClass('clicked');
+            array.push($(this));
+        });
+    </script>
+    <script>
+        $('#Jueves15001530').click(function () {
+
+            $(this).toggleClass('clicked');
+            array.push($(this));
+        });
+    </script>
+    <script>
+        $('#Jueves15301600').click(function () {
+
+            $(this).toggleClass('clicked');
+            array.push($(this));
+        });
+    </script>
+    <script>
+        $('#Jueves16001630').click(function () {
+
+            $(this).toggleClass('clicked');
+            array.push($(this));
+        });
+    </script>
+    <script>
+        $('#Jueves16301700').click(function () {
+
+            $(this).toggleClass('clicked');
+            array.push($(this));
+        });
+    </script>
+    <script>
+        $('#Jueves17001730').click(function () {
+
+            $(this).toggleClass('clicked');
+            array.push($(this));
+        });
+    </script>
+    <script>
+        $('#Jueves17301800').click(function () {
+
+            $(this).toggleClass('clicked');
+            array.push($(this));
+        });
+    </script>
+
+    <!-- Viernes -->
+    <script>
+        $('#Viernes09000930').click(function () {
+
+            $(this).toggleClass('clicked');
+            array.push($(this));
+        });
+    </script>
+    <script>
+        $('#Viernes09301000').click(function () {
+
+            $(this).toggleClass('clicked');
+            array.push($(this));
+        });
+    </script>
+    <script>
+        $('#Viernes10001030').click(function () {
+
+            $(this).toggleClass('clicked');
+            array.push($(this));
+        });
+    </script>
+    <script>
+        $('#Viernes10301100').click(function () {
+
+            $(this).toggleClass('clicked');
+            array.push($(this));
+        });
+    </script>
+    <script>
+        $('#Viernes11001130').click(function () {
+
+            $(this).toggleClass('clicked');
+            array.push($(this));
+        });
+    </script>
+    <script>
+        $('#Viernes11301200').click(function () {
+
+            $(this).toggleClass('clicked');
+            array.push($(this));
+        });
+    </script>
+    <script>
+        $('#Viernes12001230').click(function () {
+
+            $(this).toggleClass('clicked');
+            array.push($(this));
+        });
+    </script>
+    <script>
+        $('#Viernes12301300').click(function () {
+
+            $(this).toggleClass('clicked');
+            array.push($(this));
+        });
+    </script>
+    <script>
+        $('#Viernes13001330').click(function () {
+
+           $(this).toggleClass('clicked');
+           array.push($(this));
+        });
+    </script>
+    <script>
+        $('#Viernes13301400').click(function () {
+
+            $(this).toggleClass('clicked');
+            array.push($(this));
+        });
+    </script>
+    <script>
+        $('#Viernes14001430').click(function () {
+
+            $(this).toggleClass('clicked');
+            array.push($(this));
+        });
+    </script>
+    <script>
+        $('#Viernes14301500').click(function () {
+
+            $(this).toggleClass('clicked');
+            array.push($(this));
+        });
+    </script>
+    <script>
+        $('#Viernes15001530').click(function () {
+
+            $(this).toggleClass('clicked');
+            array.push($(this));
+        });
+    </script>
+    <script>
+        $('#Viernes15301600').click(function () {
+
+            $(this).toggleClass('clicked');
+            array.push($(this));
+        });
+    </script>
+    <script>
+        $('#Viernes16001630').click(function () {
+
+            $(this).toggleClass('clicked');
+            array.push($(this));
+        });
+    </script>
+    <script>
+        $('#Viernes16301700').click(function () {
+
+            $(this).toggleClass('clicked');
+            array.push($(this));
+        });
+    </script>
+    <script>
+        $('#Viernes17001730').click(function () {
+
+            $(this).toggleClass('clicked');
+            array.push($(this));
+        });
+    </script>
+    <script>
+        $('#Viernes17301800').click(function () {
+            $(this).toggleClass('clicked');
+            array.push($(this));
+        });
     </script>
 {% endblock %}
