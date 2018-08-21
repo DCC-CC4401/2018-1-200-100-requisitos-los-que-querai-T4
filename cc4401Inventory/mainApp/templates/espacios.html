@@ -38,6 +38,22 @@
     <div class="row">
     <div class="col-md-2"></div>
         <div class="col-md-4">
+            <p class="w-100 text-right">Filtrar Espacios</p>
+            <br>
+            <div style="max-height: 72px; overflow-y: scroll; background-color: #C1E9F1">
+                {% for r in spaceOptions %}
+                    <input class="checkbox_grilla float-right" type="checkbox" name="filtro" data-event="event_{{r}}">
+                    <label class="float-right mr-1" style="line-height: 11px">{{r}}</label>
+                    <br>
+                {% endfor %}
+                <!--{% for r in spaceOptions %}
+                    <input class="checkbox_grilla float-right" type="checkbox" name="filtro" data-event="event_{{r}}">
+                    <label class="float-right mr-1" style="line-height: 11px">{{r}}</label>
+                    <br>
+                {% endfor %}-->
+            </div>
+        </div>
+        <div class="col-md-4" style="margin-left: 15%">
             <form action="{% url 'reservaEspacio' %}" align="middle" method="post" id='form1'>
                 {% csrf_token %}
                 <input type="hidden" name="hiddenini" id="hiddenini">
@@ -48,22 +64,6 @@
                 <input type="datetime-local" name="t_final" id="t_final">-->
                 <button type="button" id="resButton" class="btn btn-info btn-lg" >Reservar</button>
             </form>
-        </div>
-        <div class="col-md-4">
-            <p class="w-100 text-right">Filtrar Espacios</p>
-            <br>
-            <div style="max-height: 72px; overflow-y: scroll">
-                {% for r in spaceOptions %}
-                    <input class="checkbox_grilla float-right" type="checkbox" name="filtro" data-event="event_{{r}}">
-                    <label class="float-right mr-1" style="line-height: 11px">{{r}}</label>
-                    <br>
-                {% endfor %}
-                {% for r in spaceOptions %}
-                    <input class="checkbox_grilla float-right" type="checkbox" name="filtro" data-event="event_{{r}}">
-                    <label class="float-right mr-1" style="line-height: 11px">{{r}}</label>
-                    <br>
-                {% endfor %}
-            </div>
         </div>
     </div>
     <!--Boton que ejecuta el modal correspondiente -->
@@ -104,12 +104,41 @@
                         <input type="hidden" name='ini_time' value={{initial_datetime}}>
                         <input type="hidden" name='fin_time' value={{final_datetime}}>
                         <div class="row" style="padding-left: 35%; margin-top: 5%">
-                            <select name="espacio" id="espacio">{% for spaceOpt in spaceOptions %}
+                            <select name="espacio" id="espacio">{% for spaceOpt in spacesModal %}
                                 <option value={{spaceOpt.id}}>{{ spaceOpt.name}}</option>
                             {% endfor %}
                           </select>
                         </div>
                         <h6 style="margin-top: 5%">*Recuerde que para reservar el quincho lo debe hacer con al menos 24 horas de anticipacion.</h6>
+                    </div>
+                    <div class="modal-footer">
+                            <button type="submit" class="btn btn-info">Reservar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="myModal3" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Reserva Espacio</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <form action="{% url 'crearReserva' %}" align="middle" method="post">
+                    {% csrf_token %}
+                    <div class="modal-body">
+                        <h6>Que espacio desea reservar?</h6>
+                        <input type="hidden" name='ini_time' value={{initial_datetime}}>
+                        <input type="hidden" name='fin_time' value={{final_datetime}}>
+                        <div class="row" style="padding-left: 35%; margin-top: 5%">
+                            <select name="espacio" id="espacio">{% for spaceOpt in spacesModal %}
+                                <option value={{spaceOpt.id}}>{{ spaceOpt.name}}</option>
+                            {% endfor %}
+                          </select>
+                        </div>
                     </div>
                     <div class="modal-footer">
                             <button type="submit" class="btn btn-info">Reservar</button>
@@ -149,10 +178,12 @@
     <script>
         $('.checkbox_grilla').change(function () {
             var cant = $( ".checkbox_grilla:checked" ).length;
+            alert(cant);
             if(cant == 0){
                 $('.reserv_filtro').show();
             }
             else if(cant == 1){
+
                 $(".reserv_filtro").hide();
                 $("."+$(this).data('event')).show();
             }

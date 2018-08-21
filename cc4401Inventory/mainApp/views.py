@@ -48,8 +48,8 @@ def landing_spaces(request, date=None):
         str_state = ""
         if(reserv_state == 'A'):
             str_state = "Aceptado"
-        if(reserv_state == 'P'):
-            str_state = "Pendiente"
+        if(reserv_state == 'V'):
+            str_state = "Vigente"
         space_name = r.space.name + " - " + str_state
         #reserv.append(r.space.name)
         reserv.append(space_name)
@@ -98,6 +98,10 @@ def landing_spaces_modal(request, modalActivado, spaces, ini_t, fin_t, date=None
             current_week = datetime.date.today().isocalendar()[1]
             current_date = datetime.date.today().strftime("%Y-%m-%d")
 
+    #reservations = Reservation.objects.filter(starting_date_time__week = current_week, state__in = ['P','A'])
+    #colores = {'A': 'rgba(0,153,0,0.7)',
+    #           'P': 'rgba(51,51,204,0.7)'}
+
     reservations = Reservation.objects.filter(starting_date_time__week=current_week, state__in=['A', 'V'])
     colores = {'A': 'rgba(0,153,0,0.7)',
                'V': 'rgba(153, 0, 204,0.7)'}
@@ -111,42 +115,49 @@ def landing_spaces_modal(request, modalActivado, spaces, ini_t, fin_t, date=None
         str_state = ""
         if (reserv_state == 'A'):
             str_state = "Aceptado"
-        if (reserv_state == 'P'):
-            str_state = "Pendiente"
+        if (reserv_state == 'V'):
+            str_state = "Vigente"
         space_name = r.space.name + " - " + str_state
         # reserv.append(r.space.name)
         reserv.append(space_name)
         reserv.append(localtime(r.starting_date_time).strftime("%H:%M"))
         reserv.append(localtime(r.ending_date_time).strftime("%H:%M"))
         reserv.append(colores[r.state])
-        res_list[r.starting_date_time.isocalendar()[2]-1].append(reserv)
+        reserv.append(r.space.name)
+        res_list[r.starting_date_time.isocalendar()[2] - 1].append(reserv)
 
     move_controls = list()
-    move_controls.append((datetime.datetime.strptime(current_date,"%Y-%m-%d")+datetime.timedelta(weeks=-4)).strftime("%Y-%m-%d"))
-    move_controls.append((datetime.datetime.strptime(current_date,"%Y-%m-%d")+datetime.timedelta(weeks=-1)).strftime("%Y-%m-%d"))
-    move_controls.append((datetime.datetime.strptime(current_date,"%Y-%m-%d")+datetime.timedelta(weeks=1)).strftime("%Y-%m-%d"))
-    move_controls.append((datetime.datetime.strptime(current_date,"%Y-%m-%d")+datetime.timedelta(weeks=4)).strftime("%Y-%m-%d"))
+    move_controls.append(
+        (datetime.datetime.strptime(current_date, "%Y-%m-%d") + datetime.timedelta(weeks=-4)).strftime("%Y-%m-%d"))
+    move_controls.append(
+        (datetime.datetime.strptime(current_date, "%Y-%m-%d") + datetime.timedelta(weeks=-1)).strftime("%Y-%m-%d"))
+    move_controls.append(
+        (datetime.datetime.strptime(current_date, "%Y-%m-%d") + datetime.timedelta(weeks=1)).strftime("%Y-%m-%d"))
+    move_controls.append(
+        (datetime.datetime.strptime(current_date, "%Y-%m-%d") + datetime.timedelta(weeks=4)).strftime("%Y-%m-%d"))
 
-    delta = (datetime.datetime.strptime(current_date, "%Y-%m-%d").isocalendar()[2])-1
-    monday = ((datetime.datetime.strptime(current_date, "%Y-%m-%d") - datetime.timedelta(days=delta)).strftime("%d/%m/%Y"))
+    delta = (datetime.datetime.strptime(current_date, "%Y-%m-%d").isocalendar()[2]) - 1
+    monday = (
+        (datetime.datetime.strptime(current_date, "%Y-%m-%d") - datetime.timedelta(days=delta)).strftime("%d/%m/%Y"))
 
-    """allSpaces = Space.objects.all()
+    allSpaces = Space.objects.all()
     spaceOptions = []
     for space in allSpaces:
-        spaceOptions.append(space.name)"""
+        spaceOptions.append(space.name)
 
-    #fechaMin = (datetime.datetime.strptime(current_date,"%Y-%m-%d")+datetime.timedelta(hours=1)).strftime("%Y-%m-%d")
+    fechaMin = (datetime.datetime.strptime(current_date, "%Y-%m-%d") + datetime.timedelta(hours=1)).strftime("%Y-%m-%d")
 
-
-    context = {'reservations' : res_list,
-               'current_date' : current_date,
-               'controls' : move_controls,
-               'actual_monday' : monday,
-               'spaceOptions' : spaces,
+    context = {'reservations': res_list,
+               'current_date': current_date,
+               'controls': move_controls,
+               'actual_monday': monday,
+               'spaceOptions': spaceOptions,
+               'spacesModal': spaces,
                'modalState': 1,
-               'modal' : modalActivado,
-               'initial_datetime' : ini_t,
-               'final_datetime' : fin_t}
+               'modal': modalActivado,
+               'initial_datetime': ini_t,
+               'final_datetime': fin_t,
+               'fechaMin': fechaMin}
     return render(request, 'espacios.html', context)
 
 @login_required
@@ -198,18 +209,23 @@ def reservaEspacio(request):
 
         day = request.POST["hiddendia"]
 
-        if day == "Martes":
-            datetime_object2 = datetime_object2 + datetime.timedelta(days=1)
-            final_datetime = final_datetime + datetime.timedelta(days=1)
+        dia_semana = datetime_object2.weekday()
+
+        if day == "Lunes":
+            datetime_object2 = datetime_object2 + datetime.timedelta(days=(0-dia_semana))
+            final_datetime = final_datetime + datetime.timedelta(days=(0 - dia_semana))
+        elif day == "Martes":
+            datetime_object2 = datetime_object2 + datetime.timedelta(days=(1-dia_semana))
+            final_datetime = final_datetime + datetime.timedelta(days=(1-dia_semana))
         elif day == "Miercoles":
-            datetime_object2 = datetime_object2 + datetime.timedelta(days=2)
-            final_datetime = final_datetime + datetime.timedelta(days=2)
+            datetime_object2 = datetime_object2 + datetime.timedelta(days=(2-dia_semana))
+            final_datetime = final_datetime + datetime.timedelta(days=(2-dia_semana))
         elif day == "Jueves":
-            datetime_object2 = datetime_object2 + datetime.timedelta(days=3)
-            final_datetime = final_datetime + datetime.timedelta(days=3)
+            datetime_object2 = datetime_object2 + datetime.timedelta(days=(3-dia_semana))
+            final_datetime = final_datetime + datetime.timedelta(days=(3-dia_semana))
         elif day == "Viernes":
-            datetime_object2 = datetime_object2 + datetime.timedelta(days=4)
-            final_datetime = final_datetime + datetime.timedelta(days=4)
+            datetime_object2 = datetime_object2 + datetime.timedelta(days=(4-dia_semana))
+            final_datetime = final_datetime + datetime.timedelta(days=(4-dia_semana))
 
         """return HttpResponse(datetime_object2)
         initial_t = request.POST["hiddenini"]
@@ -224,15 +240,17 @@ def reservaEspacio(request):
         """
         datetime_object3 = datetime_object2-datetime.timedelta(hours=1)
         datetime_object4 = datetime_object2-datetime.timedelta(hours=24)
-
         #initial_datetime = datetime_object2 +  datetime.timedelta(hours=3)
         #final_datetime = datetime.datetime.strptime(final_datetime, '%Y-%m-%dT%H:%M')
         #final_datetime = final_datetime + datetime.timedelta(hours=3)
+
+        initial_datetime = datetime_object2
 
         if(datetime_object3 < datetime.datetime.now()):
             listaEspacios = []
             return landing_spaces_modal(request, "#myModal1",listaEspacios, 0, 0)
         if (datetime_object4 < datetime.datetime.now()):
+
             listaEspacios = Space.objects.exclude(name="Quincho")
 
             reservas = (Reservation.objects.filter(starting_date_time__range=[initial_datetime, final_datetime]) | \
@@ -260,8 +278,10 @@ def reservaEspacio(request):
                 if space in listaEspacios:
                     listaEspacios = listaEspacios.exclude(id=id_object)
 
+
+
             #spaces = Space.objects.exclude(name = "Quincho")
-            return landing_spaces_modal(request, "#myModal2", listaEspacios, formatFecha(initial_datetime), formatFecha(final_datetime))
+            return landing_spaces_modal(request, "#myModal3", listaEspacios, formatFecha(initial_datetime), formatFecha(final_datetime))
     else:
         return redirect("/")
 
