@@ -178,12 +178,10 @@
     <script>
         $('.checkbox_grilla').change(function () {
             var cant = $( ".checkbox_grilla:checked" ).length;
-            alert(cant);
             if(cant == 0){
                 $('.reserv_filtro').show();
             }
             else if(cant == 1){
-
                 $(".reserv_filtro").hide();
                 $("."+$(this).data('event')).show();
             }
