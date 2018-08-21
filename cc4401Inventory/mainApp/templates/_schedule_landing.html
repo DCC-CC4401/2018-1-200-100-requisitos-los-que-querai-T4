@@ -34,7 +34,7 @@
                     <ul id="Lunes">
                         {% for r in reservations.0 %}
 
-                        <li class="single-event" data-start="{{r.1}}" data-end="{{r.2}}" bgcolor="{{r.3}}">
+                        <li class="single-event reserv_filtro {{r.4}}" id="{{r.4}}" data-start="{{r.1}}" data-end="{{r.2}}" bgcolor="{{r.3}}">
                             <a href="">
                                 <em class="event-name">{{r.0}}</em>
                             </a>
@@ -70,7 +70,7 @@
 
                         {% for r in reservations.1 %}
 
-                        <li class="single-event" data-start="{{r.1}}" data-end="{{r.2}}" bgcolor="{{r.3}}">
+                        <li class="single-event reserv_filtro {{r.4}}" id="{{r.4}}" data-start="{{r.1}}" data-end="{{r.2}}" bgcolor="{{r.3}}">
                             <a href="">
                                 <em class="event-name">{{r.0}}</em>
                             </a>
@@ -104,7 +104,7 @@
                     <ul id="Miercoles">
                         {% for r in reservations.2 %}
 
-                        <li class="single-event" data-start="{{r.1}}" data-end="{{r.2}}" bgcolor="{{r.3}}" >
+                        <li class="single-event reserv_filtro event_{{r.4}}" data-start="{{r.1}}" data-end="{{r.2}}" bgcolor="{{r.3}}" >
                             <a href="">
                                 <em class="event-name">{{r.0}}</em>
                             </a>
@@ -139,7 +139,7 @@
                     <ul id="Jueves">
                         {% for r in reservations.3 %}
 
-                        <li class="single-event" data-start="{{r.1}}" data-end="{{r.2}}"  bgcolor="{{r.3}}">
+                        <li class="single-event reserv_filtro {{r.4}}" id="{{r.4}}" data-start="{{r.1}}" data-end="{{r.2}}"  bgcolor="{{r.3}}">
                             <a href="">
                                 <em class="event-name">{{r.0}}</em>
                             </a>
@@ -174,7 +174,7 @@
                     <ul id="Viernes">
                         {% for r in reservations.4 %}
 
-                        <li class="single-event" data-start="{{r.1}}" data-end="{{r.2}}" bgcolor="{{r.3}}">
+                        <li class="single-event reserv_filtro {{r.4}}" id="{{r.4}}" data-start="{{r.1}}" data-end="{{r.2}}" bgcolor="{{r.3}}">
                             <a href="">
                                 <em class="event-name">{{r.0}}</em>
                             </a>
@@ -244,4 +244,5 @@
 
 	<div class="cover-layer"></div>
 </div> <!-- .cd-schedule -->
-<!-- Modificar boton para que filtre reservas por horario seleccionado usar ID para obtener hora de inicio y fin -->
+
+

@@ -46,11 +46,21 @@
             {% if loan.user == user %}
                 {% if loan.state == "V" %}
                     <form method="POST" action="{% url 'lost_request' loan.id %}"> {% csrf_token %}
-                        <button type="submit" class="btn btn-warning float-left">Declarar perdido</button>
+                        <input class="delete-button"
+                                       type="button"
+                                       id="submitBtn"
+                                       data-toggle="modal"
+                                       data-target="#confirm-submit2"
+                                       value="Declarar perdido"/>
                     </form>
                 {% elif loan.state == "P" or loan.state == "A" %}
                     <form method="POST" action="{% url 'cancel_request' loan.id %}"> {% csrf_token %}
-                        <button type="submit" class="btn btn-danger float-left">Cancelar reserva</button>
+                        <input class="delete-button"
+                                       type="button"
+                                       id="submitBtn"
+                                       data-toggle="modal"
+                                       data-target="#confirm-submit"
+                                       value="Cancelar Reserva"/>
                     </form>
                 {% endif %}
             {% endif %}
@@ -74,4 +84,53 @@
             </div>
         </div>
     </div>
+
+    <div id="confirm-submit" class="modal fade" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Confirmar eliminación</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>¿Seguro que quieres cancelar esta reserva?</p>
+            </div>
+            <div class="modal-footer">
+                <a href="#" id="submit" class="btn btn-success success">Confirmar</a>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+            </div>
+            </div>
+        </div>
+    </div>
+    <div id="confirm-submit2" class="modal fade" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Confirmar perdido</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>¿Seguro que quieres declarar perdido el artículo?</p>
+            </div>
+            <div class="modal-footer">
+                <a href="#" id="submit" class="btn btn-success success">Confirmar</a>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+            </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block scripts %}
+    <script>
+        $(document).ready ( function () {
+            $(document).on ("click", "#submit", function () {
+                $("form").submit();
+            });
+        });
+    </script>
 {% endblock %}

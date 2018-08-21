@@ -12,5 +12,5 @@ class Loan(Action):
         ('Re', 'Recibido'),
         ('Pe', 'Perdido')
     )
-    state = models.CharField('Estado', choices=STATES, max_length=2, default='V')
+    state = models.CharField('Estado', choices=STATES, max_length=2, default='P')
     article = models.ForeignKey(Article, on_delete=models.CASCADE)

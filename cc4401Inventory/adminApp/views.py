@@ -52,8 +52,11 @@ def actions_panel(request):
 
     colores = {'A': 'rgba(0,153,0,0.7)',
                'P': 'rgba(51,51,204,0.7)',
-                'R': 'rgba(153, 0, 0,0.7)'}
-
+               'R': 'rgba(153, 0, 0,0.7)',
+               'V': 'rgba(0,153,0,0.7)',
+               'Re': 'rgba(0,0,153,0.7)',
+               'Pe': 'rgba(153, 0, 0,0.7)'
+    }
     reservations = Reservation.objects.filter(state='P').order_by('-pk')
     current_week_reservations = Reservation.objects.filter(starting_date_time__week = current_week)
     actual_date = datetime.now(tz=pytz.utc)

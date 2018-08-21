@@ -35,17 +35,37 @@
 </div>
 
 <div class="container">
-
-    <form action="{% url 'reservaEspacio' %}" align="middle" method="post">
-        {% csrf_token %}
-        <input type="hidden" name="hiddenini" id="hiddenini">
-        <input type="hidden" name="hiddenfin" id="hiddenfin">
-        <input type="hidden" name="hiddendia" id="hiddendia">
-        <input type="datetime-local" name="t_inicio" id="t_inicio" >
-        <input type="datetime-local" name="t_final" id="t_final">
-        <button type="submit" id="resButton" class="btn btn-info btn-lg" >Reservar</button>
-    </form>
-    <button type="button" id="parse">Reservar Touch</button>
+    <div class="row">
+    <div class="col-md-2"></div>
+        <div class="col-md-4">
+            <form action="{% url 'reservaEspacio' %}" align="middle" method="post" id='form1'>
+                {% csrf_token %}
+                <input type="hidden" name="hiddenini" id="hiddenini">
+                <input type="hidden" name="hiddenfin" id="hiddenfin">
+                <input type="hidden" name="hiddendia" id="hiddendia">
+                <input type="hidden" name="semana" id="semana" value={{current_date}}>
+                <!--<input type="datetime-local" name="t_inicio" id="t_inicio" >
+                <input type="datetime-local" name="t_final" id="t_final">-->
+                <button type="button" id="resButton" class="btn btn-info btn-lg" >Reservar</button>
+            </form>
+        </div>
+        <div class="col-md-4">
+            <p class="w-100 text-right">Filtrar Espacios</p>
+            <br>
+            <div style="max-height: 72px; overflow-y: scroll">
+                {% for r in spaceOptions %}
+                    <input class="checkbox_grilla float-right" type="checkbox" name="filtro" data-event="event_{{r}}">
+                    <label class="float-right mr-1" style="line-height: 11px">{{r}}</label>
+                    <br>
+                {% endfor %}
+                {% for r in spaceOptions %}
+                    <input class="checkbox_grilla float-right" type="checkbox" name="filtro" data-event="event_{{r}}">
+                    <label class="float-right mr-1" style="line-height: 11px">{{r}}</label>
+                    <br>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
     <!--Boton que ejecuta el modal correspondiente -->
     <button type="button" id="boton" class="btn" data-toggle="modal" data-target={{modal}}></button>
 
@@ -98,8 +118,9 @@
             </div>
         </div>
     </div>
-
 </div>
+
+
 
 
 
@@ -126,24 +147,39 @@
     <script src="{% static 'js/jquery-3.0.0.min.js' %}"></script>
     <script src="{% static 'js/main.js' %}"></script> <!-- Resource jQuery -->
     <script>
+        $('.checkbox_grilla').change(function () {
+            var cant = $( ".checkbox_grilla:checked" ).length;
+            if(cant == 0){
+                $('.reserv_filtro').show();
+            }
+            else if(cant == 1){
+                $(".reserv_filtro").hide();
+                $("."+$(this).data('event')).show();
+            }
+            else{
+                $("."+$(this).data('event')).show();
+            }
+        });
+    </script>
+    <script>
         var array = [];
     </script>
     <script>
         var hora_ini =[];
         var hora_fin =[];
         var dias = []
-        $('#parse').click(function(){
+        $('#resButton').click(function(){
             var i;
             for(i = 0; i < array.length; i++){
                 hora_ini.push(array[i].attr('data-start'));
                 hora_fin.push(array[i].attr('data-end'));
-                dias.push(array[i].attr('id').substr(0, array[i].attr('id').length) - 8);
+                dias.push(array[i].attr('id').substr(0, array[i].attr('id').length - 8));
             }
-            alert(hora_ini[0]);
+            //alert(hora_ini[0]);
             document.getElementById("hiddenini").value = hora_ini[0];
             document.getElementById("hiddenfin").value = hora_fin[hora_fin.length -1];
             document.getElementById("hiddendia").value = dias[0];
-            //$('form').submit()
+            $('#form1').submit()
         });
     </script>
     <script>
